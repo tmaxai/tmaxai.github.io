@@ -3,6 +3,7 @@ title: Tmax.AI
 description: Tmax AI technical blog.
 baseurl: "" # the subpath of your site, e.g. /blog
 timezone: Asia/Seoul
+locale: "ko-KR"
 
 owner:
   name: tmaxdata
