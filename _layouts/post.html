@@ -1,0 +1,19 @@
+---
+layout: default
+---
+<article>
+<div class="heading">{{ page.title }}</div>
+<p class="meta"><a class="permalink" href="{{ site.baseurl }}{{ post.url }}">&#9679;</a> {{ page.date | date_to_string }}</p>
+<!-- Output author details if some exist. -->
+{% if page.writer %}
+    <span>
+        <!-- Mugshot. -->
+        <img src="{{ page.writer | to_gravatar }}" />
+
+        <!-- Personal Info. -->
+        <p>{{ page.writer }}</p>
+    </span>
+{% endif %}
+{{ content }}
+{% include tags.html %}
+</article>
