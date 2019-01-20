@@ -13,7 +13,7 @@
 }
 body {
     color: #141515;
-    font-family:-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue", "Nanum Gothic", Arial,sans-serif;
+    font-family:-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto, "Nanum Gothic", "Helvetica Neue", Arial,sans-serif;
     text-rendering: optimizeLegibility;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -24,7 +24,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Nanum Gothic", "Lucida Grande", sans-serif;
+    font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Nanum Gothic", "Helvetica Neue", "Lucida Grande", sans-serif;
     font-weight: 400;
     color: #315572;
 }
