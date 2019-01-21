@@ -6,13 +6,14 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
 @import url(https://fonts.googleapis.com/css?family=Droid+Sans+Mono);
 @import url(https://fonts.googleapis.com/css?family=Raleway:800);
+@import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 * {
     margin: 0px;
     padding: 0px;
 }
 body {
     color: #141515;
-    font-family:-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-family:-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto, "Nanum Gothic", "Helvetica Neue", Arial,sans-serif;
     text-rendering: optimizeLegibility;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -23,7 +24,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+    font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Nanum Gothic", "Helvetica Neue", "Lucida Grande", sans-serif;
     font-weight: 400;
     color: #315572;
 }
@@ -85,7 +86,7 @@ nav ul li a:hover {
     background-color: #000000;
 }
 .heading {
-    font: 1.5em Raleway, Helvetica;
+    font: 1.5em Raleway, "Nanum Gothic", Helvetica;
     text-transform: uppercase;
     margin-top: 1.2em;
     margin-bottom: 1.3em;

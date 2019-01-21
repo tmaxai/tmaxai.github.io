@@ -2,18 +2,27 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
     <url>
-      <loc>/post/jek/</loc>
+      <loc>/post/review_Deep-Learning-for-Single-Image-Super-Resolution-A-Brief-Review/</loc>
       
-        <lastmod>2016-03-20T02:40:41+09:00</lastmod>
+        <lastmod>2019-01-21T00:00:00+09:00</lastmod>
       
       <changefreq>weekly</changefreq>
       <priority>1.0</priority>
     </url>
   
     <url>
-      <loc>/post/tes/</loc>
+      <loc>/post/youtube-test/</loc>
       
-        <lastmod>2016-01-01T00:00:00+09:00</lastmod>
+        <lastmod>2019-01-18T00:00:00+09:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>/post/example/</loc>
+      
+        <lastmod>2019-01-18T00:00:00+09:00</lastmod>
       
       <changefreq>weekly</changefreq>
       <priority>1.0</priority>

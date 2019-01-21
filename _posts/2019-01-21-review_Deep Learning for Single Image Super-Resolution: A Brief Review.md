@@ -20,6 +20,8 @@ SISR은 크게 세 종류로 기술이 구분됩니다:
  *  Reconstruction: prior knowledge 기반으로 이미지를 생성함. 시간을 많이 사용하고 scale factor가 많아질 수록(복잡한 이미지일수록?) 성능이 저하된다.
  *  **Learning based**: Markov Random Field, Neighbor embedding method, sparse coding method, random forest, Deep Learning based model 등이 제안되었으며 이 논문에서 다루는 것은 DL 기반 방법.
 
+<!-- more -->
+
 ### State-of-the-Art Deep SISR Networks
 
 ![FSRCNN](assets/img/190121-sisr-1.png)

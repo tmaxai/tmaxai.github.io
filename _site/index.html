@@ -58,107 +58,64 @@
 	  
       <hr>
       <article>
-      <div class="heading"><a href="/post/jek/">Welcome to Jekyll!</a></div>
-      <p class="meta"><a class="permalink" href="/post/jek/">&#9679;</a> 20 Mar 2016</p>
+      <div class="heading"><a href="/post/review_Deep-Learning-for-Single-Image-Super-Resolution-A-Brief-Review/">[Review] Deep Learning for Single Image Super-Resolution: A Brief Review</a></div>
+      <p class="meta"><a class="permalink" href="/post/review_Deep-Learning-for-Single-Image-Super-Resolution-A-Brief-Review/">&#9679;</a> 21 Jan 2019</p>
       <div>
-        <p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory - edit this post and re-build (or run with the <code class="highlighter-rouge">-w</code> switch) to see your changes!
-To add new posts, simply add a file in the <code class="highlighter-rouge">_posts</code> directory that follows the convention: YYYY-MM-DD-name-of-post.ext.</p>
+        
+          <h3 id="intro">Intro</h3>
 
-<p>Jekyll also offers powerful support for code snippets:</p>
+<p><em>Super Resolution</em> 은 저해상도(Low Resolution) 이미지로부터 고해상도(High Resolution) 이미지를 만들어 내는 연구분야 입니다. 낮은 사양의 촬영기기, 저장소와 전송에 드는 비용을 절약하기 위해 적용되는 손실압축 알고리즘 등에 의해서 낮은 해상도의 이미지가 생성될 수 있으며 이들은 사물을 식별하기 어렵거나 왜곡이 발생하는 등 여러 방면에서 문제가 될 수 있습니다. 이 논문에서는 딥러닝을 이용한 <em>Single Image Super Resolution</em> 연구들에 관해 소개하고 있습니다.</p>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
-  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
-<span class="k">end</span>
-<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
-<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></pre></td></tr></tbody></table></code></pre></figure>
+<h3 id="sisr-기술-구분">SISR 기술 구분</h3>
 
-<p>Check out the <a href="http://jekyllrb.com">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/mojombo/jekyll">Jekyll’s GitHub repo</a>.</p>
+<p>SISR은 크게 세 종류로 기술이 구분됩니다:</p>
+<ul>
+  <li>Interpolation: bicubic interpolation, Lanczos resampling과 같은 것들이 유명한데 이 방법들은 (다른 방법들에 비해)속도가 빠르고 간단하지만 성능이 떨어짐.</li>
+  <li>Reconstruction: prior knowledge 기반으로 이미지를 생성함. 시간을 많이 사용하고 scale factor가 많아질 수록(복잡한 이미지일수록?) 성능이 저하된다.</li>
+  <li><strong>Learning based</strong>: Markov Random Field, Neighbor embedding method, sparse coding method, random forest, Deep Learning based model 등이 제안되었으며 이 논문에서 다루는 것은 DL 기반 방법.</li>
+</ul>
 
 
-        </div>
-             
-	
-    	<span class="label label-default"><a href="/tags#jekyll-ref" title="View posts tagged with &quot;jekyll&quot;">jekyll</a></span>
-    
-    	<span class="label label-default"><a href="/tags#demo-ref" title="View posts tagged with &quot;demo&quot;">demo</a></span>
-    
-
-
+        
      </article>
 
   
       <hr>
       <article>
-      <div class="heading"><a href="/post/tes/">Demo Post</a></div>
-      <p class="meta"><a class="permalink" href="/post/tes/">&#9679;</a> 01 Jan 2016</p>
+      <div class="heading"><a href="/post/youtube-test/">유튜브 컨텐츠 업로드 테스트</a></div>
+      <p class="meta"><a class="permalink" href="/post/youtube-test/">&#9679;</a> 18 Jan 2019</p>
       <div>
-        <p>Praesent tincidunt vestibulum sem nec eleifend. Pellentesque adipiscing mollis adipiscing. Sed ipsum sem, eleifend eget dapibus in, tincidunt ut dolor. Curabitur gravida urna leo, eget auctor turpis feugiat non. Vivamus pharetra, lorem id ullamcorper rutrum, eros erat condimentum erat, ac dignissim lorem nisi nec nunc. Praesent tellus mi, volutpat quis nisl et, consectetur blandit nibh.</p>
+        
+          <p>유튜브 컨텐츠 업로드 되는지 테스트하기.</p>
 
-<p>Nulla sit amet nulla non odio sodales mollis elementum sed sem. Aenean et laoreet enim. Curabitur vulputate, mi rutrum commodo condimentum, enim nunc feugiat magna, vel rutrum sapien ante nec ante. Donec nec nibh placerat, molestie felis ac, vulputate arcu. Donec condimentum pellentesque nibh vel tincidunt. Fusce sem ipsum, varius at laoreet vitae, accumsan sed nisl. Nunc eget viverra diam. Aliquam pulvinar, enim id commodo tincidunt, risus lectus pharetra lacus, et semper enim ligula ut mauris. Sed vitae sollicitudin ante. In sollicitudin placerat dui et sagittis.</p>
-
-<blockquote>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas egestas leo id tortor feugiat, sit amet cursus diam mollis. Nunc sit amet tellus est. Nunc lacus nisl, gravida ut aliquam vel, molestie eget odio. Nulla facilisi. Ut sed libero pharetra nunc volutpat hendrerit. Mauris eget mi adipiscing, congue tellus ut, scelerisque eros. Phasellus ullamcorper dictum tellus nec pretium.</p>
-</blockquote>
-
-<p>Integer molestie orci ante, nec dictum metus aliquam ut. Donec id tristique enim. Quisque tellus est, dignissim ut justo ac, volutpat fringilla mi. Duis ultricies nec sapien vitae blandit. <strong>Suspendisse sed est mi</strong>. Mauris varius sapien vel nulla accumsan, id tincidunt ipsum ultrices. Sed eget magna mauris. Etiam porttitor lacus ullamcorper lacus tincidunt aliquam. Sed feugiat congue fringilla. Nunc velit diam, vulputate sed metus vitae, iaculis tempor arcu. Proin consectetur a erat in dignissim.</p>
-
-<ul>
-  <li>Nulla sit amet nulla non odio sodales mollis elementum sed sem.</li>
-  <li>Donec id tristique enim. Quisque tellus est, dignissim ut justo ac, volutpat fringilla mi.</li>
-  <li>Nam luctus erat dolor, non viverra nulla varius at.</li>
-</ul>
-
-<p>Curabitur nec ullamcorper dui, blandit aliquet ipsum. Integer suscipit odio quis eros fermentum auctor. Sed tincidunt quam eleifend, egestas erat vulputate, tincidunt metus. Maecenas gravida sodales mi nec posuere. Cras vel nisi condimentum, hendrerit lacus sed, scelerisque ipsum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc convallis vestibulum erat, quis porta tellus. <em>In lorem erat, sollicitudin varius posuere id, molestie ac eros</em>. Fusce luctus tellus vitae vulputate venenatis. Sed scelerisque bibendum interdum. Sed pretium commodo ultrices. Fusce luctus quam id porttitor vulputate. Integer ornare consectetur diam eget rutrum. Etiam eget sapien metus.</p>
-
-<p>Proin at libero id lorem fermentum elementum quis eget est.</p>
-
-<ol>
-  <li>Nam bibendum turpis massa, at accumsan justo fermentum ac.</li>
-  <li>Nulla non nulla ut ante condimentum mattis vel at lectus.</li>
-  <li>Etiam eget tortor tincidunt, iaculis ligula a, tristique massa. Fusce sed congue lorem, interdum sodales nisl.</li>
-</ol>
-
-<p>Etiam consequat euismod ornare. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla pellentesque ipsum vulputate, pellentesque nisl vitae, lacinia sem. Praesent auctor felis et odio ultrices, nec tempor elit lobortis. Etiam ornare massa non risus luctus, id iaculis lacus egestas. Pellentesque massa dolor, mattis id lobortis eget, tristique vitae est.</p>
-
-<hr />
-
-<p>Nam vulputate leo vitae libero vehicula, id tincidunt velit malesuada. In vel ornare nisi, id semper turpis. Vivamus erat elit, venenatis quis dui at, convallis suscipit sapien. Nunc in nisi scelerisque, aliquam mauris porttitor, facilisis ligula. Vestibulum cursus erat ac turpis bibendum, id pulvinar dolor dapibus. Proin vitae justo et velit imperdiet ultrices id id odio. Cras adipiscing ante vel mauris lobortis rutrum. Aenean eu felis est. In lacinia porttitor risus non sagittis.</p>
-
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">Greeter</span>
-  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-    <span class="vi">@message</span> <span class="o">=</span> <span class="n">message</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="nf">greet</span>
-    <span class="nb">puts</span> <span class="n">message</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-
-<span class="n">john</span> <span class="o">=</span> <span class="no">Greeter</span><span class="o">.</span><span class="n">new</span> <span class="s1">&#39;Hello, World&#39;</span>
-
-<span class="n">john</span><span class="o">.</span><span class="n">greet</span>
-</pre></div>
-
-<p>Sed imperdiet interdum ultrices. Phasellus iaculis porttitor lorem nec scelerisque. Suspendisse eros urna, adipiscing vel luctus at, feugiat sit amet arcu. Aliquam porttitor ut urna pellentesque sagittis. Donec pellentesque venenatis diam sit amet cursus. Etiam luctus, metus quis gravida fermentum, tortor arcu consequat metus, eget viverra augue risus ac dui. Fusce faucibus scelerisque quam eu sagittis. Sed sit amet sapien non augue lobortis adipiscing. Sed sagittis at lectus eu tempus. Nulla non nulla ut ante condimentum mattis vel at lectus. Nulla ultricies dui et urna semper ultrices. Sed neque ante, dictum in dignissim luctus, facilisis ornare odio. Aenean tempor ultrices magna non pharetra. Curabitur vulputate nec est aliquet suscipit. Etiam ipsum sapien, dictum quis tristique vel, pretium at elit.</p>
-
-        </div>
-             
-	
-    	<span class="label label-default"><a href="/tags#Lorpem Ipsum-ref" title="View posts tagged with &quot;Lorpem Ipsum&quot;">Lorpem Ipsum</a></span>
-    
-    	<span class="label label-default"><a href="/tags#demo-ref" title="View posts tagged with &quot;demo&quot;">demo</a></span>
-    
-
-
+        
      </article>
 
   
+      <hr>
+      <article>
+      <div class="heading"><a href="/post/example/">블로그 포스팅 예제</a></div>
+      <p class="meta"><a class="permalink" href="/post/example/">&#9679;</a> 18 Jan 2019</p>
+      <div>
+        
+          <h4 id="intro">Intro</h4>
 
+<p>블로그는 <a href="https://pages.github.com/">GitHub Pages</a>와 <a href="https://jekyllrb.com/">Jekyll</a>을 기반으로 동작합니다. Git 저장소에 markdown으로 작성된 포스트를 등록하면, Jekyll에서 미리 정의해놓은 형태의 웹 페이지로 변환하는 방식입니다. 그렇기떄문에 글을 작성할 때는 몇 가지 양식을 맞출 필요가 있습니다.</p>
+
+<h5 id="1-파일-작성">1. 파일 작성</h5>
+
+<ul>
+  <li>파일 작성은 <code class="highlighter-rouge">_posts</code> 폴더에 <strong>YYYY-MM-DD-name-of-post.md</strong> 형식을 따라 작성해야 합니다.</li>
+  <li>포스트 맨 위에 YAML을 작성해야 합니다. YAML 예시는 아래 그림에 있습니다.</li>
+</ul>
+
+<p><img src="assets/img/contributing_1.png" alt="example_yaml" /></p>
+
+
+        
+     </article>
+
+  
 
 <ul class="pager">
   

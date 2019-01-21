@@ -11,6 +11,7 @@ owner:
 url: "https://tmaxai.github.io/"
 github: https://tmaxai.github.io/
 highlighter: rouge
+excerpt_separator: "<!-- more -->"
 markdown: kramdown
 permalink: /post/:title/
 paginate: 5
