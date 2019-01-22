@@ -69,7 +69,7 @@ $$
 
 여기서 $$\mathbf{s}_t$$는 $$t$$번째 타임 스텝의 디코더 RNN Hidden State Vector이며 $$\mathbf{y}_0$$는 인코더가 최종적으로 생성한 문장 임베딩이다. 즉, 디코더 RNN은 입력으로 이전 타임 스텝의 인코더 아웃풋을 받는 구조라고 할 수 있다. 위의 모델을 그림으로 그리면 아래와 같다.
 
-![](/assets/img/2018-12-11-tacotron/02.png)
+![](/assets/img/2019-01-22-bahdanau-attention/03.png)
 
 디코더의 역할은 인코더가 생성한 소스 문장의 임베딩 벡터를 이용하여 타겟 언어의 문장으로 번역된 타겟 문장을 생성하는 것이다. 그렇다면 인코더의 역할은 소스 문장을 적절한 임베딩 벡터로 변환하는 것이라고 할 수 있다. 인코더도 마찬가지로 RNN 구조를 가지고 있으며 기본적으로 문장 임베딩은 소스 문장의 마지막 입력인 \<EOS\>, 즉 End of Sentence가 입력된 마지막 출력 벡터를 문장 임베딩 벡터로 사용하게 된다. 또한 마지막 타임 스텝의 인코더 RNN Hidden State Vector $$\mathbf{h}_{T_{\mathbf{x}}}$$는 디코더의 첫번째 타임 스텝의 Hidden State Vector $$\mathbf{s}_0$$로 들어가게 된다.
   
@@ -100,7 +100,7 @@ $$
 
 $$d$$는 인코더 RNN Hidden State Vector의 Dimension이다. 여기서 달라진 점은 $$\mathbf{y}_0$$와 $$\mathbf{s}_0$$, 그리고 새롭게 Context Vector $$\mathbf{c}_t$$가 추가된 것들을 확인할 수 있다. $$\mathbf{y}_0$$는 기존과 다르게 문장 임베딩을 사용하지 않고 문장의 시작점을 나타내는 새로운 \<Go> 토큰을 사용하게 되며 $$\mathbf{s}_0$$는 평범한 RNN처럼 Zero Vector를 사용하게 된다. 여기서 핵심은 $$\mathbf{c}_t$$를 어떻게 구하며 또 활용할 것이냐가 될 것이다. 방금까지의 설명을 그림으로 정리하면 아래와 같다.
 
-![](/assets/img/2018-12-11-tacotron/03.png)
+![](/assets/img/2019-01-22-bahdanau-attention/04.png)
 
 ## Bahdanau Attention
 일단 $$\mathbf{c}_t$$를 구하는 연산이 바로 Attention 메커니즘이 수행하는 일이 될 것이다. Bahdanau Attention에서 $$\mathbf{c}_t$$는 다음과 같이 구할 수 있다.
