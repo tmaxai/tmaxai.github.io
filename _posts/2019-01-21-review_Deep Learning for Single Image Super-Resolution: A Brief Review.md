@@ -24,12 +24,12 @@ SISR은 크게 세 종류로 기술이 구분됩니다:
 
 ### State-of-the-Art Deep SISR Networks
 
-![FSRCNN](assets/img/190121-sisr-1.png)
+![FSRCNN](/assets/img/190121-sisr-1.png)
 
 컨볼루션 신경망을 기반으로 제안된 SISR 초기 네트워크들인 **FSRCNN**, **ESPCN**의 구조이며 이 방법들은 CNN과 interpolation 방법을 조합해서 고해상도 이미지(HR feature)를 얻어내고 있습니다. FSRCNN은 저해상도 이미지(LR feature)에 *Nearest-neighbor Interpolation*을 적용, 크기를 4배로 (4x4 -> 8x8 + zero padding) 늘린 다음 CNN 레이어에 통과시키는 방법을 사용하고 있으며 ESPCN에서는 CNN 레이어를 decompose 해서 4개의 필터로 분해한 다음 LR feature 를 통과시켜 4개의 결과를 얻어내고 이를 병합하는 방법(까만 화살표)을 적용하고 있습니다. 이를 *Zero Interpolation* 방법으로 보면 노란색 화살표처럼 동작하게 됩니다.
 
 
-![Sketch of SISR](assets/img/190121-sisr-2.png)
+![Sketch of SISR](/assets/img/190121-sisr-2.png)
 
 위 그림은 SISR에서 분야에서 제안된 주요 Deep Architecture 입니다. 각각의 네트워크는 다음과 같은 특징을 가지고 있습니다:
 
@@ -46,18 +46,18 @@ SISR 네트워크에서 독특한 제안점들은 **중간 레이어의 출력�
 
 > 깊게 레이어를 쌓아나가면서 이미지 전체의 featrue를 볼 수 있게하는 기존 네트워크들과 달리, Super Resolution에서는 픽셀마다 세밀한 표현을 할 수 있도록 훈련되어야 하기 때문에 네트워크의 앞부분 레이어 정보를 뒤로 보내는 것이 좋은 효과를 보이는 것 같습니다.
 
-![LapSRN](assets/img/190121-sisr-3.png)
+![LapSRN](/assets/img/190121-sisr-3.png)
 
 그 외에 소개된 또 다른 방법으로는 Laplacian Pyramid 구조를 가지는 LapSRN, Up/Down projection 구조를 가지고 있는 DBPN 네트워크가 있으며 Generative model 기반 SISR 네트워크인 PixelCNN도 소개하고 있습니다. PixelCNN은 autoregressive 계열의 generative model이며, convolution 레이어 파라미터의 일부를 0으로 설정해서 선명한 이미지를 얻는 방법ㅇ르 제안하고 있습니다.
 
 
 ### 성능 비교
 
-![performance](assets/img/190121-sisr-5.png)
+![performance](/assets/img/190121-sisr-5.png)
 
 위에서 언급한 네트워크들의 성능 비교입니다. 성능비교 지표로는 PSNR(Peak Signal-to-Noise Ratio), SSIM(Structural Similarity)를 사용하고 있습니다. 아래는 3개의 방법(bicubic, SRResNet, SRGAN)을 이용해서 SISR을 적용한 결과를 비교하고 있습니다. 실험 결과에서는 SRResNet이 가장 좋은 성능을 보이며 SRGAN 역시 선명한 복원 결과를 보여주고 있습니다.
 
-![result_example](assets/img/190121-sisr-6.png)
+![result_example](/assets/img/190121-sisr-6.png)
 
 > 실험 결과에서 눈으로 보기에는 SRGAN이 더 선명한 이미지를 보여주는 것 같지만 옷이나 모자와 같은 세밀한 부분에서 GAN모델은 구체적인 무늬를 만들려고 시도하면서 고해상도 이미지에는 없는 것을 만들다 보니 측정 수치가 더 낮게 나오는 것 같습니다.
 
