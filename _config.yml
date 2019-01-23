@@ -20,13 +20,13 @@ paginate_path: "/page:num"
 rss_path: /feed.xml
 navigation:
 - text: About
-  url: /about/
+  url: about/
 - text: Archives
-  url: /archives/
+  url: archives/
 - text: Categories
-  url: /categories/
+  url: categories/
 - text: Tags
-  url: /tags/
+  url: tags/
 
 mathjax: true
 
