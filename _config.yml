@@ -29,6 +29,7 @@ navigation:
   url: /tags/
 
 mathjax: true
+g-analytics: UA-132990110-1
 # TODO : 타이틀 로고로 변경  -> 집에서 하자
 # footer 추가 --> 내용 정리해야함.
 # About 페이지 내용 작성
