@@ -15,7 +15,7 @@ excerpt_separator: "<!-- more -->"
 markdown: kramdown
 permalink: /post/:title/
 paginate: 5
-gems: [jekyll-paginate]
+plugins: [jekyll-paginate]
 paginate_path: "/page:num"
 rss_path: /feed.xml
 navigation:
@@ -29,10 +29,4 @@ navigation:
   url: /tags/
 
 mathjax: true
-# TODO : 타이틀 로고로 변경  -> 집에서 하자
-# footer 추가 --> 내용 정리해야함.
-# About 페이지 내용 작성
-# navigation 작성 ? --> content 논의
-# TODO : 데모 포스트 하나 작성 --> 예전에 md로 작성한 내용 옮기기(회사가서)
-# TODO : README.md 에 블로그 포스트하는 방법 작성 --> 페이지 정비 된 다음에
-# TODO : gravatar? 작성자 표시하는기능 추가
+
