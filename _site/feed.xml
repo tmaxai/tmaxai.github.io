@@ -7,6 +7,226 @@
 		<atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>[Review] Neural Machine Translation by Jointly Learning to Align and Translate</title>
+				<description>&lt;p&gt;이번 포스팅은 다음의 논문을 스터디하여 정리하였다:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1409.0473&quot;&gt;링크1&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;또한 다음의 링크도 참고하여 작성하였다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.tensorflow.org/api_docs/python/tf/contrib/seq2seq/AttentionWrapper&quot;&gt;링크2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;neural-machine-translation&quot;&gt;Neural Machine Translation&lt;/h2&gt;
+&lt;p&gt;기계 번역은 이전부터 확률적인 접근 방법을 통해서 수행이 되어왔다. 간단히 설명하면 소스 문장 &lt;script type=&quot;math/tex&quot;&gt;\mathcal{X}&lt;/script&gt;을 Conditioning하여 조건부 확률 &lt;script type=&quot;math/tex&quot;&gt;p(\mathcal{Y} \vert \mathcal{X})&lt;/script&gt;를 최대화하는 타겟 문장 &lt;script type=&quot;math/tex&quot;&gt;\mathcal{Y}&lt;/script&gt;를 찾는 것이다. 수식으로 정리하면 아래와 같다. &lt;script type=&quot;math/tex&quot;&gt;\widehat{\mathcal{Y}}&lt;/script&gt;는 모델의 타겟 문장 &lt;script type=&quot;math/tex&quot;&gt;\mathcal{Y}&lt;/script&gt;에 대한 추정 문장이다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\widehat{\mathcal{Y}} = \arg \max_{\mathcal{Y}} p(\mathcal{Y} \vert \mathcal{X})&lt;/script&gt;
+
+&lt;p&gt;최근 딥러닝을 이용한 연구가 활발히 진행되면서 뉴럴 네트워크를 통한 언어 번역을 시도해 보려는 NMT(Neural Machine Translation)에 관한 연구가 각광을 받게 되었다. NMT는 딥러닝 모델 &lt;script type=&quot;math/tex&quot;&gt;f_{\theta}(\mathcal{X})&lt;/script&gt;를 학습시키기 위해서 Loss &lt;script type=&quot;math/tex&quot;&gt;\mathcal{L}&lt;/script&gt;을 다음과 같이 사용하게 된다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\mathcal{L} = -p(f_{\boldsymbol{\theta}}(\mathcal{X}) \vert \mathcal{X})&lt;/script&gt;
+
+&lt;p&gt;즉, 이 Loss를 이용하여 모델 파라미터 &lt;script type=&quot;math/tex&quot;&gt;\boldsymbol{\theta}&lt;/script&gt;를 다음과 같은 최적화를 통해서 학습을 시키면 된다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\widehat{\boldsymbol{\theta}} = \arg \max_{\boldsymbol{\theta}} p(f_{\boldsymbol{\theta}}(\mathcal{X}) \vert \mathcal{X})&lt;/script&gt;
+
+&lt;p&gt;기존의 NMT 연구는 RNN Encoder-Decoder를 이용하는 방식으로 많이 수행이 되었는데 이번에 소개하려는 논문에서는 이러한 RNN Encoder-Decoder 모델을 Attention Mechanism을 통해서 많은 개선을 이루어냈다.&lt;/p&gt;
+
+&lt;p&gt;논문에서 주장하는 개선 사항은 다음과 같다. 기존 RNN Encoder-Decoder는 소스 문장을 고정된 길이의 벡터로 인코딩을 하였지만 제안된 모델에서는 인코딩을 벡터들의 Sequence로 인코딩을 하여서 소스 문장의 정보가 Sequence에 쫙 펼쳐지게 되며 이것을 디코더가 스스로 어떤 벡터에 중점을 둬서 정보를 취할지 선택할 수 있게 하였다. 이 과정이 Attention Mechanism이며 이것을 처음 제안한 논문이 바로 이 논문이다.&lt;/p&gt;
+
+&lt;h2 id=&quot;notation&quot;&gt;Notation&lt;/h2&gt;
+&lt;p&gt;이번 포스팅에서는 다음의 Notation을 사용할 것이다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;\mathcal{X} = (\mathbf{x}_t)_{t=1}^{T_{\mathbf{x}}} \in \mathbb{R}^{n \times T_{\mathbf{x}}}&lt;/script&gt;: 소스 문장의 단어 One-Hot 인코딩 시퀀스&lt;/li&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;\mathcal{Y} = (\mathbf{y}_t)_{t=1}^{T_{\mathbf{y}}} \in \mathbb{R}^{m \times T_{\mathbf{y}}}&lt;/script&gt;: 타겟 문장의 단어 One-Hot 인코딩 시퀀스&lt;/li&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;T_{\mathbf{x}}, T_{\mathbf{y}}&lt;/script&gt;: 각각 &lt;script type=&quot;math/tex&quot;&gt;\mathcal{X}, \mathcal{Y}&lt;/script&gt;의 시퀀스 길이 (문장의 길이)&lt;/li&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;\mathbf{x}_t, \mathbf{y}_t&lt;/script&gt;: 각각 &lt;script type=&quot;math/tex&quot;&gt;t&lt;/script&gt;번째 타임 스텝 단어의 One-Hot 인코딩&lt;/li&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;\widehat{\mathcal{Y}} = (\widehat{\mathbf{y}}_t)_{t=1}^{T_{\mathbf{y}}}&lt;/script&gt;: 모델이 타겟 문장의 단어 One-Hot 인코딩 시퀀스를 추정하기 위해서 사용하는 확률 모델 &lt;script type=&quot;math/tex&quot;&gt;\widehat{\mathbf{y}}_t&lt;/script&gt;의 시퀀스&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;rnn-encoder-decoder&quot;&gt;RNN Encoder-Decoder&lt;/h2&gt;
+&lt;p&gt;NMT의 가장 기본적인 접근은 RNN Encoder-Decoder 모델을 이용하는 것이다. RNN Encoder-Decoder 모델은 RNN 셀을 이용하여 인코더 및 디코더를 구성하고 인코더는 번역을 하고자 하는 소스 문장을 특정 임베딩 벡터로 인코딩을 하고 디코더는 임베딩된 벡터를 타겟 언어로 번역을 하여 타겟 문장을 생성해 내는 역할을 수행하게 된다.&lt;/p&gt;
+
+&lt;p&gt;Encoder-Decoder 모델은 기본적으로 다음의 역할을 수행하게 된다. 모델이 현재 타임 스텝의 디코더 아웃풋 단어 One-Hot 인코딩 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{y}_t&lt;/script&gt;를 추정하기 위해서 인코더에 입력되는 소스 문장 &lt;script type=&quot;math/tex&quot;&gt;\mathcal{X}&lt;/script&gt;와 이전 타임 스텝 디코더 아웃풋 단어 One-Hot 인코딩들인 &lt;script type=&quot;math/tex&quot;&gt;\{\mathbf{y}_0, \cdots, \mathbf{y}_{t-1}\}&lt;/script&gt;이 Conditioning이 된 조건부 확률 모델 &lt;script type=&quot;math/tex&quot;&gt;\widehat{\mathbf{y}} = p(\mathbf{y}_t \vert \mathbf{y}_0,\cdots, \mathbf{y}_{t-1}, \mathbf{x})&lt;/script&gt;를 모델링해야 하며 이것은 아래와 같이 기본 RNN 연산을 이용하여 모델링될 수 있다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}
+\widehat{\mathbf{y}}_t
+&amp; = p(\mathbf{y}_t \vert \mathbf{y}_0,\cdots, \mathbf{y}_{t-1}, \mathcal{X}) \\
+&amp; = \text{Softmax}\left( \mathbf{W_y}\mathbf{s}_t + \mathbf{b_y} \right) \\
+\mathbf{s}_t
+&amp; = \tanh(\mathbf{W_{ys}}\mathbf{y}_{t-1} + \mathbf{W_{ss}}\mathbf{s}_{t-1} + \mathbf{b_s})
+\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}
+\text{where} \
+\mathbf{y}_0 &amp; = \text{Enc}(\mathcal{X}) \\
+\mathbf{s}_0 &amp; = \mathbf{h}_{T_{\mathbf{x}}}
+\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;여기서 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{s}_t&lt;/script&gt;는 &lt;script type=&quot;math/tex&quot;&gt;t&lt;/script&gt;번째 타임 스텝의 디코더 RNN Hidden State Vector이며 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{y}_0&lt;/script&gt;는 인코더가 최종적으로 생성한 문장 임베딩이다. 즉, 디코더 RNN은 입력으로 이전 타임 스텝의 인코더 아웃풋을 받는 구조라고 할 수 있다. 위의 모델을 그림으로 그리면 아래와 같다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2019-01-22-bahdanau-attention/03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;디코더의 역할은 인코더가 생성한 소스 문장의 임베딩 벡터를 이용하여 타겟 언어의 문장으로 번역된 타겟 문장을 생성하는 것이다. 그렇다면 인코더의 역할은 소스 문장을 적절한 임베딩 벡터로 변환하는 것이라고 할 수 있다. 인코더도 마찬가지로 RNN 구조를 가지고 있으며 기본적으로 문장 임베딩은 소스 문장의 마지막 입력인 &amp;lt;EOS&amp;gt;, 즉 End of Sentence가 입력된 마지막 출력 벡터를 문장 임베딩 벡터로 사용하게 된다. 또한 마지막 타임 스텝의 인코더 RNN Hidden State Vector &lt;script type=&quot;math/tex&quot;&gt;\mathbf{h}_{T_{\mathbf{x}}}&lt;/script&gt;는 디코더의 첫번째 타임 스텝의 Hidden State Vector &lt;script type=&quot;math/tex&quot;&gt;\mathbf{s}_0&lt;/script&gt;로 들어가게 된다.&lt;/p&gt;
+
+&lt;h2 id=&quot;기존-encoder-decoder-모델의-단점-attention-mechanism으로-극복&quot;&gt;기존 Encoder-Decoder 모델의 단점: Attention Mechanism으로 극복&lt;/h2&gt;
+&lt;p&gt;이러한 기존 모델의 단점은 Bahdanau Attention 논문에서 주장하는대로 문장 임베딩을 고정된 길이로만 해야 한다는 점이다. 이 경우 짧은 문장에서는 큰 문제가 없을 수도 있지만 문장이 길어질수록 더 많은 정보를 고정된 길이로 더 많이 압축해야 하기 때문에 정보의 손실이 있다는 점이 가장 큰 문제라고 볼 수 있다. 추가적으로 RNN 특유의 Long Term Dependency 문제가 발생할 수도 있겠지만 이건 인코더 RNN을 Bidirectional로 구성하면 해결할 수 있는 문제라 여기서는 따로 언급하지 않도록 하겠다.&lt;/p&gt;
+
+&lt;p&gt;어쨌든 결과적으로 Attention 메커니즘을 통한 보완이 가능하다고 주장한다. Attention 메커니즘을 이용하면 인코더가 고정된 길이의 문장 임베딩을 할 필요가 없으며 소스 문장의 벡터의 시퀀스를 이용하여 디코더가 디코딩이 가능하게 된다. 따라서 문장의 길이에 관계없이 Dynamic하게 정보를 인코딩이 가능하게 된다. Attention 메커니즘을 이용하여 확률 모델 &lt;script type=&quot;math/tex&quot;&gt;\widehat{\mathbf{y}}&lt;/script&gt;를 기본 RNN 모델을 이용하여 모델링하면 아래와 같다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}
+\widehat{\mathbf{y}}
+&amp; = p(\mathbf{y}_t \vert \mathbf{y}_0,\cdots, \mathbf{y}_{t-1}, \mathcal{X}) \\
+&amp; = \text{Softmax}\left( \mathbf{W_y}\mathbf{s}_t + \mathbf{b_y} \right) \\
+\mathbf{s}_t
+&amp; = \tanh(\mathbf{W_{ys}}\mathbf{y}_{t-1} + \mathbf{W_{ss}}\mathbf{s}_{t-1} + \mathbf{W_{cs}}\mathbf{c}_t + \mathbf{b_s})
+\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}
+\text{where} \
+\mathbf{y}_0 &amp; = \text{&lt;Go&gt; Token}, \\
+\mathbf{s}_0 &amp; = \mathbf{0}, \\
+\mathbf{c}_t &amp; = \text{Attn}(\mathbf{s}_{t-1}, \mathbf{H}), \\
+\mathbf{H} &amp; = [\mathbf{h}_{1}; \cdots ; \mathbf{h}_{T_{\mathbf{x}}}] \in \mathbb{R}^{d \times T_{\mathbf{x}}}
+\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;d&lt;/script&gt;는 인코더 RNN Hidden State Vector의 Dimension이다. 여기서 달라진 점은 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{y}_0&lt;/script&gt;와 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{s}_0&lt;/script&gt;, 그리고 새롭게 Context Vector &lt;script type=&quot;math/tex&quot;&gt;\mathbf{c}_t&lt;/script&gt;가 추가된 것들을 확인할 수 있다. &lt;script type=&quot;math/tex&quot;&gt;\mathbf{y}_0&lt;/script&gt;는 기존과 다르게 문장 임베딩을 사용하지 않고 문장의 시작점을 나타내는 새로운 &amp;lt;Go&amp;gt; 토큰을 사용하게 되며 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{s}_0&lt;/script&gt;는 평범한 RNN처럼 Zero Vector를 사용하게 된다. 여기서 핵심은 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{c}_t&lt;/script&gt;를 어떻게 구하며 또 활용할 것이냐가 될 것이다. 방금까지의 설명을 그림으로 정리하면 아래와 같다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2019-01-22-bahdanau-attention/04.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;bahdanau-attention&quot;&gt;Bahdanau Attention&lt;/h2&gt;
+&lt;p&gt;일단 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{c}_t&lt;/script&gt;를 구하는 연산이 바로 Attention 메커니즘이 수행하는 일이 될 것이다. Bahdanau Attention에서 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{c}_t&lt;/script&gt;는 다음과 같이 구할 수 있다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}
+\mathbf{c}_t
+&amp; = \sum_{j=1}^{T_{\mathbf{x}}} \mathbf{a}_{tj}\mathbf{h}_j \\
+&amp; = \mathbf{H} \mathbf{a}_t \\
+\mathbf{a}_t &amp; = \text{Softmax}\left(\left(\text{Score}(\mathbf{s}_{t-1}, \mathbf{h}_j)\right)_{j=1}^{T_{\mathbf{x}}}\right) \in \mathbb{R}^{T_{\mathbf{x}}} \\
+\text{Score}(\mathbf{s}_{t-1}, \mathbf{h}_j) &amp; = \mathbf{v}^\text{T}\tanh (\mathbf{W_a}\mathbf{s}_{t-1} + \mathbf{U_a}\mathbf{h}_j)
+\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\mathbf{a}_t&lt;/script&gt;는 Alignment Vector라고 정의한다. &lt;script type=&quot;math/tex&quot;&gt;\mathbf{a}_t&lt;/script&gt;의 각 성분 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{a}_{t1}, \cdots, \mathbf{a}_{tT_{\mathbf{x}}}&lt;/script&gt;를 이용하여 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{h}_1,\cdots \mathbf{h}_{T_{\mathbf{x}}}&lt;/script&gt;를 Weighted Sum을 한 것이 Context Vector &lt;script type=&quot;math/tex&quot;&gt;\mathbf{c}_t&lt;/script&gt;가 되는 것이다. 여기서 주의깊게 살펴봐야 하는 것이 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{a}_t&lt;/script&gt;의 각 성분 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{a}_{tj}&lt;/script&gt;는 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{s}_{t-1}&lt;/script&gt;과 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{h}_j&lt;/script&gt; 사이의 연관성을 Scoring한 결과라고 볼 수 있다. 즉, &lt;script type=&quot;math/tex&quot;&gt;\mathbf{s}_{t-1}&lt;/script&gt;과 모든 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{h}_1,\cdots \mathbf{h}_{T_{\mathbf{x}}}&lt;/script&gt; 사이의 연관성을 Weight로 하여서 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{h}_1,\cdots \mathbf{h}_{T_{\mathbf{x}}}&lt;/script&gt;의 Weighted Sum을 구하는 방식으로 Context Vector를 구하는 것이다.&lt;/p&gt;
+
+&lt;p&gt;또 주의깊게 봐야 할 부분은 Score Function의 형태이다. 사실 두 벡터 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{s}_{t-1}&lt;/script&gt;과 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{h}_j&lt;/script&gt; 사이의 Similarity를 구한다는 관점에서 봤을 경우 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{W_a}\mathbf{s}_{t-1} - \mathbf{U_a}\mathbf{h}_j&lt;/script&gt;라고 쓰는 것이 더 직관적일 것 같기는 하다. &lt;script type=&quot;math/tex&quot;&gt;\mathbf{W_a}&lt;/script&gt;와 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{U_a}&lt;/script&gt;라는 두 Linear Transformation을 통해서 임베딩 공간에 뿌려진 두 벡터 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{W_a}\mathbf{s}_{t-1}&lt;/script&gt;과 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{U_a}\mathbf{h}_j&lt;/script&gt; 사이의 거리를 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{W_a}\mathbf{s}_{t-1} - \mathbf{U_a}\mathbf{h}_j&lt;/script&gt;라고 정의할 수도 있기 때문이다. 어쨌든 그건 부호의 차이일 뿐이니 여기서는 큰 의미는 없다. 어쨌든 Score Function에 관해서는 Luong Attention에서 더 논하기 때문에 여기서는 넘어가도록 한다. Luong Attention에 대한 포스팅은 &lt;a href=&quot;https://hcnoh.github.io/2019-01-01-luong-attention&quot;&gt;링크&lt;/a&gt;를 참조하면 된다.&lt;/p&gt;
+
+&lt;h2 id=&quot;gru-모델에서의-attention-메커니즘-활용&quot;&gt;GRU 모델에서의 Attention 메커니즘 활용&lt;/h2&gt;
+&lt;p&gt;위에서는 기본 RNN 모델을 이용하여 확률 모델 &lt;script type=&quot;math/tex&quot;&gt;\widehat{\mathbf{y}}_t&lt;/script&gt;를 모델링한 결과를 보였다. 하지만 최근에는 LSTM, GRU 등의 RNN 모델들을 활용하는 경우가 많으며 이에따라 논문 Appendix에는 GRU에 대한 Attention 메커니즘의 활용이 잘 정리가 되어있다.&lt;/p&gt;
+
+&lt;p&gt;먼저 기본 GRU의 연산은 아래와 같이 정리할 수 있다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}
+\widehat{\mathbf{y}}_t
+&amp; = \text{Softmax}\left( \mathbf{W_y}\mathbf{s}_t + \mathbf{b_y} \right) \\
+\mathbf{s}_t
+&amp; = \mathbf{z}_t \odot \mathbf{s}_{t-1} + (1-\mathbf{z}_t) \odot \tilde{\mathbf{s}}_t \\
+\mathbf{z}_t
+&amp; = \sigma(\mathbf{W_z}\mathbf{y}_{t-1} + \mathbf{U_z}\mathbf{s}_{t-1} + \mathbf{b}_z) \\
+\mathbf{r}_t
+&amp; = \sigma(\mathbf{W_r}\mathbf{y}_{t-1} + \mathbf{U_r}\mathbf{s}_{t-1} + \mathbf{b}_r) \\
+\tilde{\mathbf{s}}_t
+&amp; = \tanh(\mathbf{W_s}\mathbf{y}_{t-1} + \mathbf{U_s}(\mathbf{r}_t \odot \mathbf{s}_{t-1}) + \mathbf{b}_s)
+\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\sigma&lt;/script&gt;는 Sigmoid Function을 나타낸 것이다. Attention 메커니즘을 활용하여 위의 연산들을 재정의하면 아래와 같이 정리할 수 있다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}
+\widehat{\mathbf{y}}_t
+&amp; = \text{Softmax}\left( \mathbf{W_y}\mathbf{s}_t + \mathbf{b_y} \right) \\
+\mathbf{s}_t
+&amp; = \mathbf{z}_t \odot \mathbf{s}_{t-1} + (1-\mathbf{z}_t) \odot \tilde{\mathbf{s}}_t \\
+\mathbf{z}_t
+&amp; = \sigma(\mathbf{W_z}\mathbf{y}_{t-1} + \mathbf{U_z}\mathbf{s}_{t-1} + \mathbf{C_z}\mathbf{c}_t + \mathbf{b}_z) \\
+\mathbf{r}_t
+&amp; = \sigma(\mathbf{W_r}\mathbf{y}_{t-1} + \mathbf{U_r}\mathbf{s}_{t-1} + \mathbf{C_r}\mathbf{c}_t + \mathbf{b}_r) \\
+\tilde{\mathbf{s}}_t
+&amp; = \tanh(\mathbf{W_s}\mathbf{y}_{t-1} + \mathbf{U_s}(\mathbf{r}_t \odot \mathbf{s}_{t-1}) + \mathbf{C_s}\mathbf{c}_t + \mathbf{b}_s)
+\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;GRU 모델 및 기본 RNN 모델에서의 Context Vector의 활용을 살펴보면 다음의 특징을 파악할 수 있다. Context Vector &lt;script type=&quot;math/tex&quot;&gt;\mathbf{c}_t&lt;/script&gt;는 RNN의 입력으로 사용되는 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{y}_{t-1}&lt;/script&gt;과 함께 등장하며 함께 임베딩 공간에 뿌려져서 더해지는 방식으로 활용된다. 즉, 간단하게 정리하자면 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{Wy}_{t-1}&lt;/script&gt; 대신 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{Wy}_{t-1} + \mathbf{Cc}_t&lt;/script&gt;가 된다는 것이다. 이건 RNN 입력을 &lt;script type=&quot;math/tex&quot;&gt;\mathbf{y}_{t-1}&lt;/script&gt; 단독으로 사용하는 것이 아니라 Context Vector &lt;script type=&quot;math/tex&quot;&gt;\mathbf{c}_t&lt;/script&gt;와 Concatenation하여 사용하는 것과 같은 의미이다. 이걸 수식으로 정리하면 다음과 같다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{align*}
+[\mathbf{W};\mathbf{C}][\mathbf{y}_{t-1}^{\text{T}};\mathbf{c}_t^{\text{T}}]^{\text{T}} = \mathbf{Wy}_{t-1} + \mathbf{Cc}_t
+\end{align*}&lt;/script&gt;
+
+&lt;p&gt;이 부분은 TensorFlow의&lt;code class=&quot;highlighter-rouge&quot;&gt; AttentionWrapper&lt;/code&gt; 모듈에서도 확인할 수 있는 부분이다. &lt;code class=&quot;highlighter-rouge&quot;&gt;AttentionWrapper&lt;/code&gt; 모듈은 &lt;code class=&quot;highlighter-rouge&quot;&gt;cell_input_fn&lt;/code&gt;을 인자로 받아 RNN의 입력 및 Attention을 어떻게 받게 할지를 설정할 수 있다. 이 때 &lt;code class=&quot;highlighter-rouge&quot;&gt;cell_input_fn&lt;/code&gt;의 디폴트를 살펴보면 아래와 같음을 알 수 있다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AttentionWrapper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rnn_cell_impl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RNNCell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;Wraps another `RNNCell` with attention.
+  &quot;&quot;&quot;&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+      &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;cell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;attention_mechanism&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;attention_layer_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;alignment_history&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;cell_input_fn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;output_attention&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;initial_cell_state&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;attention_layer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;생략&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;생략&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;cell_input_fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;optional&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`callable`&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;sb&quot;&gt;`lambda inputs, attention: array_ops.concat([inputs, attention], -1)`&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;생략&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;즉, 현재 입력 및 Attention, 즉 여기서는 Context Vector &lt;script type=&quot;math/tex&quot;&gt;\mathbf{c}_t&lt;/script&gt;가 Concatenation되어서 입력으로 사용된다는 것을 확인할 수 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;tensorflow에서의-bahdanau-attention의-활용&quot;&gt;TensorFlow에서의 Bahdanau Attention의 활용&lt;/h2&gt;
+
+&lt;p&gt;이 부분은 Bahdanau Attention 뿐 아니라 다음에 정리할 Luong Attention 등의 여러 다른 Attention 메커니즘들에도 동일하게 적용될 수 있는 부분이다. 기본적으로 TensorFlow에서는 Bahdanau Attention 등의 잘 알려져있는 Attention 메커니즘을 위한 모듈을 제공한다.&lt;/p&gt;
+
+&lt;p&gt;아래의 코드는 아주 기본적으로 활용될 수 있는 Attention 메커니즘 구현 예제이다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;tensorflow&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;hyparams&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hp&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;enc_outs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encoder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inputs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;cell&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rnn_cell&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GRUCell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num_units&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attention_units&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;attn_mechanism&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;contrib&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seq2seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BahdanauAttention&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;num_units&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attention_depth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;memory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;enc_outs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;attn_cell&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;contrib&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seq2seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AttentionWrapper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;cell&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attn_cell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attention_mechanism&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attention_mechanism&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;alignment_history&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output_attention&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;위의 예제에서는 인코더의 RNN Hidden State Vector가 아닌 단순하게 인코더의 출력을 Attention의 입력인 Attention Memory로 설정하였다. 따라서 인코더의 출력인 &lt;code class=&quot;highlighter-rouge&quot;&gt;enc_outs&lt;/code&gt;가 미리 준비되어 있어야 한다. 이제 Attention을 위한 GRU 셀을 &lt;code class=&quot;highlighter-rouge&quot;&gt;tf.nn.rnn_cell.GRUCell&lt;/code&gt;을 이용하여 선언하여 준다. 위의 예제에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;cell&lt;/code&gt;이 그 역할을 하게 될 것이다.&lt;/p&gt;
+
+&lt;p&gt;그 다음으로는 Attention 메커니즘을 선언하여야 한다. 여기서는 Bahdanau Attention을 사용하기 위하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;tf.contrib.seq2seq.BahdanauAttention&lt;/code&gt; 모듈을 이용하였다.&lt;/p&gt;
+
+&lt;p&gt;마지막으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;cell&lt;/code&gt;과 Attention 메커니즘인 &lt;code class=&quot;highlighter-rouge&quot;&gt;attn_mechanism&lt;/code&gt;을 이용하여 Attention 셀로 묶어줘야 한다. 이 역할은 &lt;code class=&quot;highlighter-rouge&quot;&gt;tf.contrib.seq2seq.AttentionWrapper&lt;/code&gt;가 담당하게 된다. 이런식으로 선언된 &lt;code class=&quot;highlighter-rouge&quot;&gt;AttentionWrapper&lt;/code&gt;는 방금 더 위에서 확인할 수 있듯이 &lt;code class=&quot;highlighter-rouge&quot;&gt;rnn_cell_impl.RNNCell&lt;/code&gt;을 상속받는 클래스이다. 따라서 이제 &lt;code class=&quot;highlighter-rouge&quot;&gt;attn_cell&lt;/code&gt;은 기존 GRU 셀처럼 &lt;code class=&quot;highlighter-rouge&quot;&gt;dynamic_rnn&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;dynamic_decode&lt;/code&gt; 등에 활용할 수 있게 된다.&lt;/p&gt;
+
+&lt;h2 id=&quot;실험-및-성능-검증&quot;&gt;실험 및 성능 검증&lt;/h2&gt;
+
+&lt;p&gt;논문에서는 여러 실험을 통해서 성능을 검증하였지만 여기서는 간단하게 한가지만 소개하도록 하겠다. 실험은 기계 번역 성능을 확인하는 방식으로 진행되었다. 기본적으로 영어에서 불어로 번역하는 기능을 학습시켰는데 학습에 사용한 데이터는 ACL WMT 14에서 제공하는 데이터셋을 이용하였다. 이 데이터셋의 특징은 Bilingual하고 Parallel한 코퍼스라는 특징이 있다. 다음은 실험 결과 그래프이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2019-01-22-bahdanau-attention/01.PNG&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;기본적으로 BLEU 스코어를 이용하여 성능을 검증하였는데 BLEU 스코어에 대한 정리는 다음에 하도록 하겠다. 어쨌든 Attention 메커니즘을 활용한 모델인 RNNsearch-50, RNNsearch-30이 그렇지 않은 모델인 RNNenc-50, RNNenc-30 보다 성능적으로 우수하다는 점을 확인할 수 있다. RNNsearch-50, RNNenc-50은 문장 길이가 50정도 되는 코퍼스에 학습시킨 모델이고 RNNsearch-30, RNNenc-30은 마찬가지로 문장 길이가 30정도 되는 코퍼스에 학습시킨 모델이다. 또한 확실히 문장 길이가 길어질수록 성능이 떨어지는 점도 추가적으로 확인할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2019-01-22-bahdanau-attention/02.PNG&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;위 그림은 Attention Alignment를 시각화한 그림이다. 특정 단어를 번역하기 위해서는 그 단어에 가장 눈에 띄는 Alignment가 있어야 하며 잘 동작하는 것을 확인할 수 있다.&lt;/p&gt;
+</description>
+				<pubDate>Tue, 22 Jan 2019 00:00:00 +0900</pubDate>
+				<link>http://localhost:4000/post/bahdanau-attention/</link>
+				<guid isPermaLink="true">http://localhost:4000/post/bahdanau-attention/</guid>
+			</item>
+		
+			<item>
 				<title>[Review] Deep Learning for Single Image Super-Resolution: A Brief Review</title>
 				<description>&lt;h3 id=&quot;intro&quot;&gt;Intro&lt;/h3&gt;
 
@@ -25,11 +245,11 @@
 
 &lt;h3 id=&quot;state-of-the-art-deep-sisr-networks&quot;&gt;State-of-the-Art Deep SISR Networks&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/img/190121-sisr-1.png&quot; alt=&quot;FSRCNN&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/190121-sisr-1.png&quot; alt=&quot;FSRCNN&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;컨볼루션 신경망을 기반으로 제안된 SISR 초기 네트워크들인 &lt;strong&gt;FSRCNN&lt;/strong&gt;, &lt;strong&gt;ESPCN&lt;/strong&gt;의 구조이며 이 방법들은 CNN과 interpolation 방법을 조합해서 고해상도 이미지(HR feature)를 얻어내고 있습니다. FSRCNN은 저해상도 이미지(LR feature)에 &lt;em&gt;Nearest-neighbor Interpolation&lt;/em&gt;을 적용, 크기를 4배로 (4x4 -&amp;gt; 8x8 + zero padding) 늘린 다음 CNN 레이어에 통과시키는 방법을 사용하고 있으며 ESPCN에서는 CNN 레이어를 decompose 해서 4개의 필터로 분해한 다음 LR feature 를 통과시켜 4개의 결과를 얻어내고 이를 병합하는 방법(까만 화살표)을 적용하고 있습니다. 이를 &lt;em&gt;Zero Interpolation&lt;/em&gt; 방법으로 보면 노란색 화살표처럼 동작하게 됩니다.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/img/190121-sisr-2.png&quot; alt=&quot;Sketch of SISR&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/190121-sisr-2.png&quot; alt=&quot;Sketch of SISR&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;위 그림은 SISR에서 분야에서 제안된 주요 Deep Architecture 입니다. 각각의 네트워크는 다음과 같은 특징을 가지고 있습니다:&lt;/p&gt;
 
@@ -50,17 +270,17 @@
   &lt;p&gt;깊게 레이어를 쌓아나가면서 이미지 전체의 featrue를 볼 수 있게하는 기존 네트워크들과 달리, Super Resolution에서는 픽셀마다 세밀한 표현을 할 수 있도록 훈련되어야 하기 때문에 네트워크의 앞부분 레이어 정보를 뒤로 보내는 것이 좋은 효과를 보이는 것 같습니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/img/190121-sisr-3.png&quot; alt=&quot;LapSRN&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/190121-sisr-3.png&quot; alt=&quot;LapSRN&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;그 외에 소개된 또 다른 방법으로는 Laplacian Pyramid 구조를 가지는 LapSRN, Up/Down projection 구조를 가지고 있는 DBPN 네트워크가 있으며 Generative model 기반 SISR 네트워크인 PixelCNN도 소개하고 있습니다. PixelCNN은 autoregressive 계열의 generative model이며, convolution 레이어 파라미터의 일부를 0으로 설정해서 선명한 이미지를 얻는 방법ㅇ르 제안하고 있습니다.&lt;/p&gt;
 
 &lt;h3 id=&quot;성능-비교&quot;&gt;성능 비교&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/img/190121-sisr-5.png&quot; alt=&quot;performance&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/190121-sisr-5.png&quot; alt=&quot;performance&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;위에서 언급한 네트워크들의 성능 비교입니다. 성능비교 지표로는 PSNR(Peak Signal-to-Noise Ratio), SSIM(Structural Similarity)를 사용하고 있습니다. 아래는 3개의 방법(bicubic, SRResNet, SRGAN)을 이용해서 SISR을 적용한 결과를 비교하고 있습니다. 실험 결과에서는 SRResNet이 가장 좋은 성능을 보이며 SRGAN 역시 선명한 복원 결과를 보여주고 있습니다.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/img/190121-sisr-6.png&quot; alt=&quot;result_example&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/190121-sisr-6.png&quot; alt=&quot;result_example&quot; /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;실험 결과에서 눈으로 보기에는 SRGAN이 더 선명한 이미지를 보여주는 것 같지만 옷이나 모자와 같은 세밀한 부분에서 GAN모델은 구체적인 무늬를 만들려고 시도하면서 고해상도 이미지에는 없는 것을 만들다 보니 측정 수치가 더 낮게 나오는 것 같습니다.&lt;/p&gt;
@@ -74,15 +294,6 @@
 				<pubDate>Mon, 21 Jan 2019 00:00:00 +0900</pubDate>
 				<link>http://localhost:4000/post/review_Deep-Learning-for-Single-Image-Super-Resolution-A-Brief-Review/</link>
 				<guid isPermaLink="true">http://localhost:4000/post/review_Deep-Learning-for-Single-Image-Super-Resolution-A-Brief-Review/</guid>
-			</item>
-		
-			<item>
-				<title>유튜브 컨텐츠 업로드 테스트</title>
-				<description>&lt;p&gt;유튜브 컨텐츠 업로드 되는지 테스트하기.&lt;/p&gt;
-</description>
-				<pubDate>Fri, 18 Jan 2019 00:00:00 +0900</pubDate>
-				<link>http://localhost:4000/post/youtube-test/</link>
-				<guid isPermaLink="true">http://localhost:4000/post/youtube-test/</guid>
 			</item>
 		
 			<item>
