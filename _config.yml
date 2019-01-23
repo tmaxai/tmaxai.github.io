@@ -28,6 +28,7 @@ navigation:
 - text: Tags
   url: /tags/
 
+mathjax: true
 # TODO : 타이틀 로고로 변경  -> 집에서 하자
 # footer 추가 --> 내용 정리해야함.
 # About 페이지 내용 작성
