@@ -11,9 +11,9 @@ group: navigation
       <p class="meta"><a class="permalink" href="{{ site.baseurl }}{{ post.url }}">&#9679;</a> {{ post.date | date_to_string }}</p>
       <div>
         {% if post.excerpt %}
-          {{ post.excerpt }}
+          {{ post.excerpt | truncatewords: 150}}
         {% else %}
-          {{ post.content}}
+          {{ post.content }}
         {% endif }
         </div>
              {% include tags.html %}
