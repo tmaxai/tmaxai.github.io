@@ -30,3 +30,5 @@ navigation:
 
 mathjax: true
 
+disqus:
+  shortname: 
