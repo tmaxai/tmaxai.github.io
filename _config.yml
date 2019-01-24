@@ -30,5 +30,4 @@ navigation:
 
 mathjax: true
 
-disqus:
-  shortname: tmaxai
+disqus: https-tmaxai-github-io
