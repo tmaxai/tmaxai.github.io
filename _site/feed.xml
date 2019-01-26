@@ -296,26 +296,5 @@
 				<guid isPermaLink="true">http://localhost:4000/post/review_Deep-Learning-for-Single-Image-Super-Resolution-A-Brief-Review/</guid>
 			</item>
 		
-			<item>
-				<title>블로그 포스팅 예제</title>
-				<description>&lt;h4 id=&quot;intro&quot;&gt;Intro&lt;/h4&gt;
-
-&lt;p&gt;블로그는 &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;와 &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;을 기반으로 동작합니다. Git 저장소에 markdown으로 작성된 포스트를 등록하면, Jekyll에서 미리 정의해놓은 형태의 웹 페이지로 변환하는 방식입니다. 그렇기떄문에 글을 작성할 때는 몇 가지 양식을 맞출 필요가 있습니다.&lt;/p&gt;
-
-&lt;h5 id=&quot;1-파일-작성&quot;&gt;1. 파일 작성&lt;/h5&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;파일 작성은 &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; 폴더에 &lt;strong&gt;YYYY-MM-DD-name-of-post.md&lt;/strong&gt; 형식을 따라 작성해야 합니다.&lt;/li&gt;
-  &lt;li&gt;포스트 맨 위에 YAML을 작성해야 합니다. YAML 예시는 아래 그림에 있습니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/img/contributing_1.png&quot; alt=&quot;example_yaml&quot; /&gt;&lt;/p&gt;
-
-</description>
-				<pubDate>Fri, 18 Jan 2019 00:00:00 +0900</pubDate>
-				<link>http://localhost:4000/post/example/</link>
-				<guid isPermaLink="true">http://localhost:4000/post/example/</guid>
-			</item>
-		
 	</channel>
 </rss>
