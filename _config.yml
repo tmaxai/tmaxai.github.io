@@ -35,5 +35,4 @@ sass:
     sass_dir: css
     style: :compressed
 
-disqus:
-  shortname: tmaxai
+disqus: https-tmaxai-github-io
