@@ -1,7 +1,8 @@
 # Jekyll Defaults
 title: Tmax.AI
 description: Tmax AI technical blog.
-baseurl: "https://tmaxai.github.io" # the subpath of your site, e.g. /blog
+# baseurl: "https://tmaxai.github.io" # the subpath of your site, e.g. /blog
+baseurl: ""
 timezone: Asia/Seoul
 locale: "ko-KR"
 
@@ -29,5 +30,9 @@ navigation:
   url: tags/
 
 mathjax: true
+
+sass:
+    sass_dir: css
+    style: :compressed
 
 disqus: https-tmaxai-github-io
