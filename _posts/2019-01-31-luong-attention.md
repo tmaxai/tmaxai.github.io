@@ -132,7 +132,7 @@ Luong Attention의 저자들이 가졌던 또 다른 불만은 다음과 같다.
 
 사실 말은 그럴듯하지만 별것은 아니다. 현재 타임 스텝의 입력 $$\mathbf{y}_{t-1}$$이 들어갈 때 이전 타임 스텝의 새로운 Hidden State Vector $$\tilde{\mathbf{s}}_{t-1}$$을 함께 Concatenate하여 넣어주는 것이다. 아래의 그림은 Input Feeding이 이루어지는 방식을 정리한 것이다.
 
-![](/assets/img/2019-01-01-luong-attention/03.png)
+![](/assets/img/2019-01-31-luong-attention/03.png)
 
 이렇게 함으로써 얻을 수 있는 장점을 저자들은 다음과 같이 정리하였다.
 - 이전의 Alignment 정보들을 Fully 활용할 수 있다.
