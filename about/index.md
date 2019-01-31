@@ -37,3 +37,5 @@ title: About us
 현재 대화형 시스템을 구축하고 있고, 구체적인 연구 내용은 정리하면서 공유할 예정입니다.
 
 ![NLP](/assets/img/about/nlp.jpg)
+
+{% include disqus.html %}
