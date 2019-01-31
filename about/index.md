@@ -3,13 +3,13 @@ layout: default
 title: About us
 ---
 
-이 블로그는 티맥스데이터 AI실에서 운영하는 기술 블로그 입니다. 오픈을 위해서 노력하고 있으니 기다려주세요 :)
+티맥스데이터 AI 연구실에서 운영하는 기술 블로그입니다. 최신 기술이나 논문에 대한 서베이 및 신규 연구 결과물을 공유할 예정입니다.
 
-티맥스데이터 홈페이지: [Tmaxdata](https://www.tmaxdata.com)
+여기서 다루는 연구 주제는 크게 세 가지입니다. 
 
-블로그는 GitHub Pages, Jekyll, blueface 테마를 이용해서 만들어졌습니다. (사실 쓸 말이 없어서)
-*  [GitHub Pages](https://pages.github.com/)
-*  [Jekyll](https://jekyllrb.com/)
-*  [blueface theme](https://github.com/tnguyen/blueface/)
+- 정형데이터 분석
+- 비전 (이미지 또는 동영상 처리)
+- 자연어처리
 
-> 필요한 기능은 Github Issue에 남겨주세요. or AI2-1팀에 연락하기
+게시물 하단에 Discuss 플러인을 통해 코멘트를 달 수 있도록 했습니다.
+많은 관심과 피드백 부탁드립니다.
