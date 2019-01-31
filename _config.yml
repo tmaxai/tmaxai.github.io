@@ -9,7 +9,7 @@ locale: "ko-KR"
 owner:
   name: tmaxdata
 
-url: "https://tmaxai.github.io/"
+url: "https://tmaxai.github.io"
 github: https://tmaxai.github.io/
 highlighter: rouge
 excerpt_separator: "<!-- more -->"
