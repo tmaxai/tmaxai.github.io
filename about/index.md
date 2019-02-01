@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: about
 title: About us
 ---
 
@@ -12,7 +12,7 @@ title: About us
 
 ## 연구 주제
 
-현재 연구실에서 다루는 주제는 크게 세 가지입니다. 
+현재 연구실에서 다루는 주제는 크게 세 가지입니다.
 
 - 정형데이터 분석
 - 비전 (이미지 또는 동영상 처리)
@@ -37,5 +37,3 @@ title: About us
 현재 대화형 시스템을 구축하고 있고, 구체적인 연구 내용은 정리하면서 공유할 예정입니다.
 
 ![NLP](/assets/img/about/nlp.jpg)
-
-{% include disqus.html %}
