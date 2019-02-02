@@ -7,7 +7,7 @@ tags: [Attention, survey]
 writer: hyungcheol_noh@tmax.co.kr
 ---
 
-이번 포스팅은 다음의 논문을 스터디하여 정리하였다:
+이번 포스팅은 다음의 논문을 스터디하여 정리하였습니다:
 - [논문 "Effective Approaches to Attention-based Neural Machine Translation"](https://arxiv.org/pdf/1508.04025)
 
 ## Notation
