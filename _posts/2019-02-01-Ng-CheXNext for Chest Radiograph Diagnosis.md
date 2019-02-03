@@ -4,7 +4,7 @@ title: "Deep Learning for Chest Radiograph Diagnosis: A Retrospective Comparison
 date: 2019-02-01
 categories: [Research Article]
 tags: [Computer Vision, Medical AI, Research Article]
-writer: hyunsuk90@gmail.com
+author: hyunsuky
 ---
 
 이번 포스팅은 다음 논문들의 내용을 이용하여 정리하였습니다.
