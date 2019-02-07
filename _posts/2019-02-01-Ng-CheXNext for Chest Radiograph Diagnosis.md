@@ -30,8 +30,11 @@ author: hyunsuky
 ### Results
 * CheXNeXt 네트워크는 10개 종류의 병변에 대해 영상의학과 의사와 대등한 성능을 보였고, 3개의 종류의 병변에 대해서는 영상의학과 의사에 비해 낮은 성능을 보였으며, 1개의 병변에 대해서는 높은 성능을 보였습니다. 영상의학과 의사에 비해 낮은 성능을 보인 병변의 종류로 *심비대, 폐기종, 식도열공탈장*이 있고, 영상의학과 의사에 비해 높은 성능을 보인 병변으로는 *무기폐*가 있습니다.
 * 420개의 이미지를 판독하는데 영상의학과 의사는 6시간이 걸렸지만, CheXNeXt는 1.5분 밖에 소요되지 않았습니다. 
+
 ![AUC](/assets/img/2019-02-01-Ng-CheXNeXt/AUC.PNG)
+
 * Class activation mapping 결과를 보면 CheXNeXt는 정확하게 영상의학적 병변을 classify할 뿐만 아니라 localize도 할 수 있는 것을 알 수 있습니다. 아래 그림은 각각 폐결절과 폐결핵 병변을 정확하게 localize한 결과입니다. 
+
 ![Heat-map](/assets/img/2019-02-01-Ng-CheXNeXt/heat_map.PNG)
 
 ### Conclusion
