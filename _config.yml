@@ -29,6 +29,8 @@ navigation:
   url: /categories/
 - text: Tags
   url: /tags/
+- text: Search
+  url: /search/index.html
 
 mathjax: true
 
