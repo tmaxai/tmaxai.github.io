@@ -3,7 +3,7 @@ layout: post
 title: "[Review] Neural Machine Translation by Jointly Learning to Align and Translate"
 date: 2019-01-22
 categories: [Review]
-tags: [Attention, Research Article]
+tags: [Attention, Review]
 author: hcnoh
 ---
 
