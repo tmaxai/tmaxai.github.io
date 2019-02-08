@@ -3,8 +3,8 @@ layout: post
 title: "[Review] Effective Approaches to Attention-based Neural Machine Translation"
 date: 2019-01-31
 categories: [Review]
-tags: [Attention, survey]
-writer: hyungcheol_noh@tmax.co.kr
+tags: [Attention, Review]
+author: hcnoh
 ---
 
 이번 포스팅은 다음의 논문을 스터디하여 정리하였습니다:
