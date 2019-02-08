@@ -3,8 +3,8 @@ layout: post
 title: "[Review] Neural Machine Translation by Jointly Learning to Align and Translate"
 date: 2019-01-22
 categories: [Review]
-tags: [Attention, survey]
-writer: hyungcheol_noh@tmax.co.kr
+tags: [Attention, Research Article]
+author: hcnoh
 ---
 
 이번 포스팅은 다음의 논문을 스터디하여 정리하였습니다:
