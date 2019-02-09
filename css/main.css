@@ -1,4 +1,4 @@
-/* @override 
+/* @override
 	http://localhost:4000/css/main.css */
 
 
@@ -13,7 +13,7 @@
 }
 body {
     color: #141515;
-    font-family:-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto, "Nanum Gothic", "Helvetica Neue", Arial,sans-serif;
+    font-family:-apple-system,system-ui, "Segoe UI", Roboto, "Nanum Gothic", "Helvetica Neue", Arial,sans-serif;
     text-rendering: optimizeLegibility;
     overflow-y: scroll;
     overflow-x: hidden;
