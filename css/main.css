@@ -57,7 +57,7 @@ header h1 a:hover {
     margin-right: auto;
 	padding-right: 32px;
 	padding-left: 32px;
-	width: 640px;
+	width: 95%;
 }
 #current {
     background-color: #b91414;
@@ -308,7 +308,7 @@ code {
 @media (min-width: 704px) {
 
     #main {
-        width: 640px;
+        width: 95%;
         margin-left: auto;
         margin-right: auto;
     }
