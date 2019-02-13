@@ -53,11 +53,12 @@ header h1 a:hover {
     color: #76a0dd;
 }
 #nav_container {
+	width: 90%;
+	max-width: 950px;
     margin-left: auto;
     margin-right: auto;
 	padding-right: 32px;
 	padding-left: 32px;
-	width: 95%;
 }
 #current {
     background-color: #b91414;
@@ -127,6 +128,17 @@ p strong {
     font-weight: 500;
     font-style: normal;
     font-family: Roboto, Helvetica Neue, Helvetica, Arial, Sans-serif !important;
+}
+table {
+  border-collapse: collapse;
+  min-width: 300px;
+  margin: 0 auto;
+}
+table, th, td {
+  border: 1px solid black;
+  padding: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 article {
     margin-top: 32px;
@@ -309,6 +321,7 @@ code {
 
     #main {
         width: 95%;
+		max-width: 1000px;
         margin-left: auto;
         margin-right: auto;
     }
