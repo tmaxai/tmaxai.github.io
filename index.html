@@ -17,7 +17,7 @@ group: navigation
       </p>
       <div>
         {% if post.excerpt %}
-          {{ post.excerpt | strip_html | truncatewords: 20}}
+          {{ post.excerpt | strip_html | truncatewords: 30}}
         {% else %}
           {{ post.content }}
         {% endif }
