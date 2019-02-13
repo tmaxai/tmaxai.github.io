@@ -128,6 +128,17 @@ p strong {
     font-style: normal;
     font-family: Roboto, Helvetica Neue, Helvetica, Arial, Sans-serif !important;
 }
+table {
+  border-collapse: collapse;
+  min-width: 300px;
+  margin: 0 auto;
+}
+table, th, td {
+  border: 1px solid black;
+  padding: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
 article {
     margin-top: 32px;
     margin-bottom: 3em;
