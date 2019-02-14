@@ -88,7 +88,7 @@ nav ul li a:hover {
     background-color: #000000;
 }
 .heading {
-    font-family: 'Jeju Gothic', serif;
+    font-family: "Nanum Gothic", serif;
     font-weight: 600;
     font-size: 22px 
     text-transform: uppercase;
@@ -338,7 +338,7 @@ code {
     	font-size: 0.9em;
     }
     .heading {
-	font-family: 'Jeju Gothic', serif;
+	font-family: "Nanum Gothic", serif;
     	font-weight: 600;
 	font-size: 22px 
     }
