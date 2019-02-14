@@ -7,7 +7,7 @@
 @import url(https://fonts.googleapis.com/css?family=Droid+Sans+Mono);
 @import url(https://fonts.googleapis.com/css?family=Raleway:800);
 @import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
-@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(https://fonts.googleapis.com/earlyaccess/jejugothic.css);
 * {
     margin: 0px;
     padding: 0px;
@@ -25,7 +25,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Nanum Gothic", "Helvetica Neue", "Lucida Grande", sans-serif;
+    font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Nanum Gothic", "Jeju Gothic", "Helvetica Neue", "Lucida Grande", sans-serif;
     font-weight: 400;
     color: #315572;
 }
@@ -88,7 +88,7 @@ nav ul li a:hover {
     background-color: #000000;
 }
 .heading {
-    font-family: 'Jeju Gothic', serif;
+    font-family: "Jeju Gothic", serif;
     font-weight: 600;
     font-size: 22px 
     text-transform: uppercase;
@@ -338,7 +338,7 @@ code {
     	font-size: 0.9em;
     }
     .heading {
-	font-family: 'Jeju Gothic', serif;
+	font-family: "Jeju Gothic", serif;
     	font-weight: 600;
 	font-size: 22px 
     }
