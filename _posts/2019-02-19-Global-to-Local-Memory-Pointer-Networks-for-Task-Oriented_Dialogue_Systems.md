@@ -18,7 +18,7 @@
     2. Local memory decoder
     3. Shared external knowledge
 
-    ![](/assets/img/2019-02-12-intro_bayes/2019-02-1210-f72d3bf5-eda1-45be-85bf-8745d62a32f8.46.12.png)
+    ![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/2019-02-1210-f72d3bf5-eda1-45be-85bf-8745d62a32f8.46.12.png)
 
 - **Global memory pointer** modifies  the external knowledge
 - The **local memory decoder** first uses a **sketch RNN** to obtain sketch responses *without slot values*
@@ -65,7 +65,7 @@ Two functions — **`global contextual representation`** and  **`Knowledge read 
 
     The dialogue context ***X*** is stored in the ***dialogue memory module***, as a **triplet form**
 
-![](/assets/img/2019-02-12-intro_bayes/2019-02-159-f3550334-1242-4a1a-91b2-7136ef3e6e6f.58.55.png)
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/2019-02-159-f3550334-1242-4a1a-91b2-7136ef3e6e6f.58.55.png)
 
 **Triplet KB** :              {(*Tom's house, distance, **3 miles***) , .. , (*Starbucks, address, **792 Bedoin St***)}
 
@@ -105,7 +105,7 @@ $$o^{k} = \sum_{i}p^{k}_{i}c^{k+1}_{i}\; , \;\; \; \;\;\;\; q^{k+1}=q^{k}+o^{k}$
 
 ## 2.2  Global Memory Pointer
 
-![](/assets/img/2019-02-12-intro_bayes/Untitled-427ed9b9-a4c7-4e31-8f8e-a4e879508523.png)
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-427ed9b9-a4c7-4e31-8f8e-a4e879508523.png)
 
 1. **Context RNN** is used to model the ***sequential dependenc**y* and **encode** the ***context X***
 
@@ -155,7 +155,7 @@ $$G^{label} = (g_{1}^{l},...\;g_{n+l}^{l})\;\;\;\;\;\;\; where\;\;\;\;\;\;\;\;\;
 
          - 1 ***if*** the **object words** in the memory exits in the ***expected system response Y***
 
-![](/assets/img/2019-02-12-intro_bayes/Untitled-413b380d-f90d-4f34-af5b-d15ffde4aa62.png)
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-413b380d-f90d-4f34-af5b-d15ffde4aa62.png)
 
                Figure 3. The process of modelling the loss function
 
@@ -171,11 +171,11 @@ $$Memory \;\; readout \; = \; q^{K+1}$$
 
 ## 2.3  Local Memory Decoder
 
-![](/assets/img/2019-02-12-intro_bayes/Untitled-51536bb6-c71a-4d44-89fb-b3c28c254ba2.png)
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-51536bb6-c71a-4d44-89fb-b3c28c254ba2.png)
 
 - From the **Global memory encoder**, we found
 
-![](/assets/img/2019-02-12-intro_bayes/Untitled-5820d9e6-c498-4043-bb1b-8b88f3f0f059.png)
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-5820d9e6-c498-4043-bb1b-8b88f3f0f059.png)
 
 1. **Local memory decoder** —> initializes its **sketch RNN** using the concatenation of the ***h_n*** and ***q^K+1***
 2. This generates a **sketch response** with the ***sketch tags*** but ***without slot values***
@@ -215,7 +215,7 @@ $$Loss\_{v} =\sum_{t=1}^{m} -log(P^{vocab}_{t}\;(y^{s}_{t}))$$
 
 $$L=(L_{1},....\;L_{m})$$
 
-![](/assets/img/2019-02-12-intro_bayes/Untitled-51536bb6-c71a-4d44-89fb-b3c28c254ba2.png)
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-51536bb6-c71a-4d44-89fb-b3c28c254ba2.png)
 
 - At each time step t, the **global memory pointer *G*** modifies the ***global contextual representation*** using its attnetion weights
 
@@ -224,7 +224,7 @@ $$c^{k}_{i} = c^{k}_{i}\; \times \;g_{i} \;\;\;\;\;\;\;\forall \; i \in [1,\; n+
 - And then the sketch RNN hidden state ***h_d*** queires the external knowledge.
 - The **memory attention** in the **last hop** is the corresponding **local memory pointer** ***L_t*** which is represneted as the memory distribution at time step t
 
-![](/assets/img/2019-02-12-intro_bayes/Untitled-08753954-421a-43c1-abca-f6e2f7c461eb.png)
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-08753954-421a-43c1-abca-f6e2f7c461eb.png)
 
 Figure 4. The representation of "***local memory pointer*** as the memory attention in the last hop
 
@@ -272,7 +272,7 @@ $$Loss = \alpha \;Loss_g + \beta\;Loss_v\;+\gamma\;Loss_l$$
 
     - Two test sets for each task  —  one follows the **same distribution as the training set** and the other has **OOV entity values**
 
-    ![](/assets/img/2019-02-12-intro_bayes/Untitled-48c0d3c4-9a54-4f76-95e4-f3b2e8f54010.png)
+    ![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-48c0d3c4-9a54-4f76-95e4-f3b2e8f54010.png)
 
     Example of Task 3 from bABI dialogue dataset ([https://github.com/IBM/permuted-bAbI-dialog-tasks](https://github.com/IBM/permuted-bAbI-dialog-tasks))
 
@@ -296,11 +296,11 @@ $$Loss = \alpha \;Loss_g + \beta\;Loss_v\;+\gamma\;Loss_l$$
 
 **`Results`**
 
-![](/assets/img/2019-02-12-intro_bayes/Untitled-b041641d-8b46-4ebf-8ebc-a255bcae69e4.png)
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-b041641d-8b46-4ebf-8ebc-a255bcae69e4.png)
 
 Per-response accuracy and completion rate (in the parentheses) on bAbI dialogues. GLMP achieves the least out-of-vocabulary performance drop. Baselines are reported from Query Reduction Network (Seo et al., 2017), End-to-end Memory Network (Bordes & Weston, 2017), Gated Memory Network (Liu & Perez, 2017), Point to Unknown Word (Gulcehre et al., 2016), and Memory-to-Sequence (Madotto et al., 2018)
 
-![](/assets/img/2019-02-12-intro_bayes/Untitled-9208b428-1c07-4f4c-b7df-b16fe50b3b02.png)
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-9208b428-1c07-4f4c-b7df-b16fe50b3b02.png)
 
 In SMD dataset, our model achieves highest BLEU score and entity F1 score over baselines, including previous state-of-the-art result from Madotto et al. (2018).
 
@@ -308,7 +308,7 @@ In SMD dataset, our model achieves highest BLEU score and entity F1 score over b
 
 - The contributions of the **global memory pointer G** and the **memory writing of dialogue histroy H** are investigated for bABI OOv task and SMD (K=1)
 
-![](/assets/img/2019-02-12-intro_bayes/Untitled-80866f8f-bc79-43dd-b760-683d3ee0502e.png)
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-80866f8f-bc79-43dd-b760-683d3ee0502e.png)
 
 Ablation study using single hop model. Note a 0.4% increase in T5 suggests that the ***use of G may impose too strong prior entity probability***
 
