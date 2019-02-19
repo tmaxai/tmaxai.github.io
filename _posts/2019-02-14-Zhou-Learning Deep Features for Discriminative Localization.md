@@ -22,7 +22,7 @@ author: hyunsuky
 ## Methods 
 * 논문에서 제시한 model의 구조는 아래 그림과 같습니다. 
 
-![AUC](/assets/img/2019-02-14-Zhou-CAM/model.PNG)
+![AUC](/assets/img/2019-02-14-Zhou-CAM/model.png)
 
 * Model의 구조를 보면 **마지막 fully-connected layers들을 제거하고 GAP + softmax layer로 대체**한 것을 알 수 있습니다. 이러한 구조를 사용했을 때 parameter 숫자는 현저하게 감소하게 됩니다 (e.g. VGG-net에 대해 90% less parameter). 
 * GAP 전의 마지막 convolutional layer의 spatial resolution이 좋을수록 localization 능력이 향상되므로, 네트워크들에 대해 3x3, stride 1, pad 1, 1024 unit의 convolutional layer를 추가하였습니다. 
@@ -32,7 +32,7 @@ $$M_c(x,y) = \displaystyle \sum_{k}w_k^cf_k(x,y)$$ <br>
 $$S_c= \displaystyle \sum_{k}w_k^c \displaystyle \sum_{x,y}f_k(x,y)=\displaystyle \sum_{x,y}\displaystyle \sum_{k}w_k^cf_k(x,y)$$입니다. 
 * 논문에서 제시한 model을 이용해서 CAM을 구한 결과들은 다음과 같습니다. 
 
-![AUC](/assets/img/2019-02-14-Zhou-CAM/CAM_example.PNG)
+![AUC](/assets/img/2019-02-14-Zhou-CAM/CAM_example.png)
 
 ## Results
 * Classification
@@ -41,7 +41,7 @@ $$S_c= \displaystyle \sum_{k}w_k^c \displaystyle \sum_{x,y}f_k(x,y)=\displaystyl
     * Classification 성능이 좋은 네트워크가 localization 능력도 좋은 것으로 확인되었습니다. 
     * CAM으로부터 bounding box를 얻기 위해, thresholding technique를 이용하여 heatmap을 segmentation 하였습니다. CAM의 max value와 비교했을 때 20% 이상인 region을 segmentation 하였고, segmentation된 영역을 포함하는 최대 크기의 box를 bounding box로 설정하였습니다. 이 과정을 classifiation output 중 가장 확률이 높은 5개의 class에 대해 진행하였습니다. 
     * 제시된 localization 방법은 explicitly labeled된 **bounding box를 사용하지 않은 weakly supervised learning 방법**이지만, ILSVRC test set에 대해 GoogLeNet-GAP의 top-5 localization error가 37.1% 밖에 되지 않았습니다. 
-    ![AUC](/assets/img/2019-02-14-Zhou-CAM/localization_error.PNG)
+    ![AUC](/assets/img/2019-02-14-Zhou-CAM/localization_error.png)
 * 그 이외의 결과들
     * GAP output에 linear SVM을 연결시켜서 학습시켰을 때, 네트워크가 **generic discriminative localization**을 효과적으로 하는 것이 확인되었습니다. 이러한 generic localizble feature를 이용하여 **recognition task, pattern discovery, concept localization**도 효과적으로 수행하였습니다. 
 
