@@ -109,7 +109,7 @@ $$o^{k} = \sum_{i}p^{k}_{i}c^{k+1}_{i}\; , \;\; \; \;\;\;\; q^{k+1}=q^{k}+o^{k}$
 
 1. **Context RNN** is used to model the ***sequential dependenc**y* and **encode** the ***context X***
 
-         -  *End-to-end MN cannot reflect the **dependencies** between memories (*)*
+      - End-to-end MN cannot reflect the **dependencies** between memories (*)
 
  2.  The **hidden states** are written into the external knowledge as shown in ***Figure 1(b)***
 
@@ -138,8 +138,7 @@ $$c^{K}_{i} = c^{K}_{i} + h^{e}_{m_{i}}\;\;\;\;\; if\;\; m_{i} \in X \;\; and \;
 
 $$G = (g_{1},...,\;g_{n+l})$$
 
-       Unlike conventional attention mechanism that all the weights sum to one, each element in ***G*** is an **independent** 
-       probability.
+- Unlike conventional attention mechanism that all the weights sum to one, each element in ***G*** is an **independent** probability.
 
 - Query the external knowledge using ***h_n*** until the last hop
 
@@ -153,7 +152,7 @@ $$G = (g_{1},...,\;g_{n+l})$$
 
 $$G^{label} = (g_{1}^{l},...\;g_{n+l}^{l})\;\;\;\;\;\;\; where\;\;\;\;\;\;\;\;\;g_{i}^{l} = \begin{Bmatrix} 1 \;\; if\;\; Object(m_{i})\; \in \; Y\\ 0\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \;\; otherwise \end{Bmatrix}$$
 
-         - 1 ***if*** the **object words** in the memory exits in the ***expected system response Y***
+- 1 ***if*** the **object words** in the memory exits in the ***expected system response Y***
 
 ![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-413b380d-f90d-4f34-af5b-d15ffde4aa62.png)
 
@@ -193,7 +192,7 @@ $$Memory \;\; readout \; = \; q^{K+1}$$
 
 **`Sketch RNN`**
 
-    Use **GRU** to generate a ***sketech reponse*** ***Y,*** without ***real slot values***
+Use **GRU** to generate a ***sketech reponse*** ***Y,*** without ***real slot values***
 
 $$Y^{s} = (y^{s}_{1},...\;y^{s}_{m})$$
 
@@ -211,7 +210,7 @@ $$Loss\_{v} =\sum_{t=1}^{m} -log(P^{vocab}_{t}\;(y^{s}_{t}))$$
 
 **`Local Memory Pointer`**
 
-    Local memory pointer contains a **sequence of pointers,** 
+Local memory pointer contains a **sequence of pointers,** 
 
 $$L=(L_{1},....\;L_{m})$$
 
@@ -268,7 +267,7 @@ $$Loss = \alpha \;Loss_g + \beta\;Loss_v\;+\gamma\;Loss_l$$
 
               4.  providing additional information
 
-      -    Task 5 is the **union** of Tasks 1-4
+     -    Task 5 is the **union** of Tasks 1-4
 
     - Two test sets for each task  —  one follows the **same distribution as the training set** and the other has **OOV entity values**
 
