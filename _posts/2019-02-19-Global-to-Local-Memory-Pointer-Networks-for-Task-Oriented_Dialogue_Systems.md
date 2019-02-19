@@ -318,3 +318,4 @@ Ablation study using single hop model. Note a 0.4% increase in T5 suggests that 
 - The ***global memory encoder*** and the ***local memory decoder*** are designed to incorporate the **shared external knowledge** into the learning framework.
 - We empirically show that the global and the local memory pointer are able to effectively produce system responses even in the ***out-of-vocabulary scenario***, and visualize how global memory pointer helps as well.
 - As a result, our model achieves **state-of-the-art** results in both the simulated and the ***human-human dialogue*** datasets, and holds potential for extending to other tasks such as *question answering* and *text summarization*.
+
