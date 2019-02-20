@@ -48,7 +48,7 @@ $$S_c= \displaystyle \sum_{k}w_k^c \displaystyle \sum_{x,y}f_k(x,y)=\displaystyl
 ## 개인적으로 생각하는 논문의 장단점 
 * 장점: 
 1. Semi-supervised learning을 이용하여 classification network만으로 single pass에 classification 및 localization을 수행하였습니다. 
-2. CAM의 성능이 매우 좋습니다. 참고로 ChexNeXt에서도 heat map을 얻기 위해 본 논문에서 제시한 방법을 사용하였고, 매우 정확한 heat map이 얻어졌습니다. 
+2. CAM의 성능이 매우 좋습니다. 참고로 [ChexNeXt](https://tmaxai.github.io/post/Ng-CheXNext-for-Chest-Radiograph-Diagnosis/)에서도 heat map을 얻기 위해 본 논문에서 제시한 방법을 사용하였고, 매우 정확한 heat map이 얻어졌습니다. 
 
 * 단점:
 1. 인위적으로 network architecture를 변형시켜야 되고, fully connected layer를 사용할 수 없습니다. 
