@@ -2,8 +2,8 @@
 layout: post
 title: "Deep Learning for Chest Radiograph Diagnosis: A Retrospective Comparison of the CheXNeXt Algorithm to Practicing Radiologists"
 date: 2019-02-01
-categories: [Research Article]
-tags: [Computer Vision, Medical AI, Research Article]
+categories: [Paper Review]
+tags: [CNN, Medical AI, Classification, 초급]
 author: hyunsuky
 ---
 
