@@ -228,7 +228,7 @@ $$c^{k}_{i} = c^{k}_{i}\; \times \;g_{i} \;\;\;\;\;\;\;\forall \; i \in [1,\; n+
 - And then the sketch RNN hidden state ***h_d*** queires the external knowledge.
 - The **memory attention** in the **last hop** is the corresponding **local memory pointer** ***L_t*** which is represneted as the memory distribution at time step t
 
-![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/8.png)
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/10.png)
 
 Figure. The representation of "***local memory pointer*** as the memory attention in the last hop (Here, p^K is L^t)
 
