@@ -154,7 +154,7 @@ $$G^{label} = (g_{1}^{l},...\;g_{n+l}^{l})\;\;\;\;\;\;\; where\;\;\;\;\;\;\;\;\;
 
 ![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-413b380d-f90d-4f34-af5b-d15ffde4aa62.png)
 
-               Figure 3. The process of modelling the loss function
+           							    Figure 3. The process of modelling the loss function
 
 - Then the global memory pointer is trained using binary cross-entropy loss Loss_g between G and G^label
 
@@ -289,7 +289,7 @@ $$Loss = \alpha \;Loss_g + \beta\;Loss_v\;+\gamma\;Loss_l$$
 
 ![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/SMD_data_capture.png)
 
-                                          Example of SMD dataset
+                                         						 Example of SMD dataset
 
 **`Results`**
 
