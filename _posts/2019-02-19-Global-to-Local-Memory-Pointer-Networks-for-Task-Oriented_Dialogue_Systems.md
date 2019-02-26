@@ -13,9 +13,9 @@ author: robinsongh381
 ## 1.  Introduction
 
 - **Three** main components
-  1. Global memory encoder
-  2. Local memory decoder
-  3. Shared external knowledge
+1. Global memory encoder
+2. Local memory decoder
+3. Shared external knowledge
 
  ![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/table1.png)
  Figure1. The proposed (a) global-to-local memory pointer networks for task-oriented dialogue
