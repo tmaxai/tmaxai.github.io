@@ -49,9 +49,9 @@ $$Y = ( y_{1},..., y_{m})$$
 
 Two functions — **`global contextual representation`** and  **`Knowledge read & write`**
 
-**`Global Contextual Representation`**
+**Global Contextual Representation**
 
- External Knowledge contains `global contextual representation` that is ***shared*** with the **encoder** and the **decoder.**
+ External Knowledge contains *global contextual representation* that is ***shared*** with the **encoder** and the **decoder.**
 
  **End-to-end memory networks**  are   to store word-level information for **KB memory** and **Dialogue memory**
 
@@ -77,7 +77,7 @@ Table. An in-car assistant example on the navigation domain. The left part is th
 
      -   Here ***Object( . )*** denotes the function as getting the object word from a triplet
 
-**`Knowledge read & write`**
+**Knowledge read & write**
 
 - External knowledge is composed of a set of trainable ***embedding matrices***
 
@@ -120,7 +120,7 @@ Figure. Global memory encoder
 
 
 
-**`Context RNN`**
+**Context RNN**
 
 - **GRU** is used to encode the dialogue history into the hidden states
 
@@ -132,7 +132,7 @@ $$H = (h^{e}_{1},\; ...\; , h^{e}_n)$$
 
 $$c^{K}_{i} = c^{K}_{i} + h^{e}_{m_{i}}\;\;\;\;\; if\;\; m_{i} \in X \;\; and \;\;\;\forall\;k\;\in\;[1,K+1]   $$
 
-**`Global Memory Pointer`**
+**Global Memory Pointer**
 
 - Global memory pointer is a vector containing real values between 0 and 1.
 
@@ -160,7 +160,7 @@ Figure 3. The process of modelling the loss function
 
 - Then the global memory pointer is trained using binary cross-entropy loss Loss_g between G and G^label
 
-## **`Loss Function`**
+**Loss Function**
 
 $$Loss_{g} = -\sum_{i=1}^{n+l}\;[\;g^{l}_{i} \times log\; g_{i} \;+\; (1-g^{l}_{i})\;\times\;log\;(1-g_{i})\;] $$
 
@@ -304,7 +304,7 @@ Per-response accuracy and completion rate (in the parentheses) on bAbI dialogues
 
 In SMD dataset, our model achieves highest BLEU score and entity F1 score over baselines, including previous state-of-the-art result from Madotto et al. (2018).
 
-**`Ablation Study`**
+**Ablation Study**
 
 - The contributions of the **global memory pointer G** and the **memory writing of dialogue histroy H** are investigated for bABI OOv task and SMD (K=1)
 
