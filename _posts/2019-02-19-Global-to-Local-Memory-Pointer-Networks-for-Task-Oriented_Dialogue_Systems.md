@@ -124,7 +124,7 @@ $$o^{k} = \sum_{i}p^{k}_{i}c^{k+1}_{i}\; , \;\; \; \;\;\;\; q^{k+1}=q^{k}+o^{k}$
 
 $$H = (h^{e}_{1},\; ...\; , h^{e}_n)$$
 
-      and the last hidden state ***h_n*** is used to query the **external knowledge** as the **encoded the dialogue history** 
+      - and the last hidden state ***h_n*** is used to query the **external knowledge** as the **encoded the dialogue history** 
 
 - The hidden states ***h is added*** to the original memory representation
 
@@ -136,13 +136,13 @@ $$c^{K}_{i} = c^{K}_{i} + h^{e}_{m_{i}}\;\;\;\;\; if\;\; m_{i} \in X \;\; and \;
 
 $$G = (g_{1},...,\;g_{n+l})$$
 
-- Unlike conventional attention mechanism that all the weights sum to one, each element in ***G*** is an **independent** probability.
+- Unlike conventional attention mechanism that all the weights sum to one, each element in **G** is an **independent** probability.
 
 - Query the external knowledge using ***h_n*** until the last hop
 
-      -  take an **inner product** 
+      - take an **inner product** 
 
-      -  followed by the **Sigmoid function**
+      - followed by the **Sigmoid function**
 
     $$g_{i} = Sigmoid((q^{K})^{T} c^{K}_{i})$$
 
@@ -287,7 +287,7 @@ $$Loss = \alpha \;Loss_g + \beta\;Loss_v\;+\gamma\;Loss_l$$
 
      
 
-![](/assets/img/2019-02-12-intro_bayes/Untitled-343401b1-e357-4a8a-b571-4a10ed4f0c49.png)
+![](/assets/img/019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-343401b1-e357-4a8a-b571-4a10ed4f0c49.png)
 
                                           Example of SMD dataset
 
