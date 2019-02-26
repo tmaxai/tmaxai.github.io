@@ -6,8 +6,8 @@ categories: [Paper Review]
 tags: [NLP, Memory Network, End-to-End Dialogue Systems]
 author: robinsongh381
 ---
-
-# Global to Local Memory Pointer Networks for Task Oriented Dialogue Systems
+x
+<!-- # Global to Local Memory Pointer Networks for Task Oriented Dialogue Systems -->
 
 > *End-to-end task TODS is challenging since knowledge bases are usually large, dynamic hard to incorporate into  a learning framework. We propose the global-to-local memory pointer **(GLMP)** networks to address this issue.   [[Paper](https://openreview.net/pdf?id=ryxnHhRqFm)*]
 
@@ -16,10 +16,7 @@ author: robinsongh381
     2. Local memory decoder
     3. Shared external knowledge
 
-    ![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/1.png)
-
-Figure: The proposed (a) global-to-local memory pointer networks for task-oriented dialogue systems and the (b) external knowledge architecture.
-
+ ![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/2019-02-1210-f72d3bf5-eda1-45be-85bf-8745d62a32f8.46.12.png)
 
 - **Global memory pointer** modifies  the external knowledge
 - The **local memory decoder** first uses a **sketch RNN** to obtain sketch responses *without slot values*
@@ -54,25 +51,23 @@ Two functions — **`global contextual representation`** and  **`Knowledge read 
 
 **`Global Contextual Representation`**
 
- External Knowledge contains ***global contextual representation*** that is ***shared*** with the **encoder** and the **decoder.**
+ External Knowledge contains `global contextual representation` that is ***shared*** with the **encoder** and the **decoder.**
 
- **End-to-end memory networks**  are used to store word-level information for **KB memory** and **Dialogue memory**
+ **End-to-end memory networks**  are   to store word-level information for **KB memory** and **Dialogue memory**
 
 - KB memory
 
-  - Each element in ***B*** is represented in the ***triplet form*** as ***(Subject, Relation, Object)***
+    Each element in ***B*** is represented in the ***triplet form*** as ***(Subject, Relation, Object)***
 
 - Dialogue memory
 
-  - The dialogue context ***X*** is stored in the ***dialogue memory module***, as a **triplet form**
+    The dialogue context ***X*** is stored in the ***dialogue memory module***, as a **triplet form**
 
-![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/2.png)
-
-Table: An in-car assistant example on the navigation domain. The left part is the KB informationand the right part is the conversation between a driver and our system
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/2019-02-159-f3550334-1242-4a1a-91b2-7136ef3e6e6f.58.55.png)
 
 **Triplet KB** :              {(*Tom's house, distance, **3 miles***) , .. , (*Starbucks, address, **792 Bedoin St***)}
 
-**Triplet Dialogue** :    {($user, turn1, I), ($user, turn1, need), (user , turn1, gas) ... )}
+**Triplet Dialogue** :    {(*$user, turn1, I*) , ($user, turn1, need), ($user, turn1, gas) ... )}
 
 - For the ***two*** memory modules, **a bag-of-word** representation is used as the memory embedding
 - During ***inference***, we copy the **object word**
@@ -95,7 +90,7 @@ $$M = [B; X] = (m_{1}, ...\ ,m_{n+l}) \\where\;  m_{i}\; is\; one\; of\; the\; t
 
 - To read the memory, the external knowledge needs an **initial query vector *q_1***
 
-     -  It can loop over ***K hops*** and computes the attention weights at each hop *k* using
+    - It can loop over ***K hops*** and computes the attention weights at each hop *k* using
 
     $$p^{k}_{i}= Softmax((q^{k})^{T} c^{k}_{i})\\where\\c^{k}_{i} =B(C^{k}(m_{i})) \in \mathbb{R}^{d_{emb}} is \; the\; embedding \; in \; i^{th}\; memory\; position, \\q^{k} is\; the\; query\; vector\; for\; hop\;  k,\; and\; B( \;) is \; the\; bag\;of\;word\; function$$
 
@@ -108,8 +103,7 @@ $$o^{k} = \sum_{i}p^{k}_{i}c^{k+1}_{i}\; , \;\; \; \;\;\;\; q^{k+1}=q^{k}+o^{k}$
 
 ## 2.2  Global Memory Pointer
 
-![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/3.png)</center>
-
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/6.png)</center>
 Figure. Global memory encoder
 
 1. **Context RNN** is used to model the ***sequential dependenc**y* and **encode** the ***context X***
@@ -125,19 +119,19 @@ Figure. Global memory encoder
 
 
 
-**Context RNN**
+**`Context RNN`**
 
 - **GRU** is used to encode the dialogue history into the hidden states
 
 $$H = (h^{e}_{1},\; ...\; , h^{e}_n)$$
 
-- The last hidden state ***h_n*** is used to query the **external knowledge** as the **encoded the dialogue history**
+  - The last hidden state ***h_n*** is used to query the **external knowledge** as the **encoded the dialogue history**
 
 - The hidden states ***h is added*** to the original memory representation
 
 $$c^{K}_{i} = c^{K}_{i} + h^{e}_{m_{i}}\;\;\;\;\; if\;\; m_{i} \in X \;\; and \;\;\;\forall\;k\;\in\;[1,K+1]   $$
 
-**Global Memory Pointer**
+**`Global Memory Pointer`**
 
 - Global memory pointer is a vector containing real values between 0 and 1.
 
@@ -161,11 +155,11 @@ $$G^{label} = (g_{1}^{l},...\;g_{n+l}^{l})\;\;\;\;\;\;\; where\;\;\;\;\;\;\;\;\;
 
 ![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-413b380d-f90d-4f34-af5b-d15ffde4aa62.png)
 
-Figure. The process of modelling the loss function
+Figure 3. The process of modelling the loss function
 
 - Then the global memory pointer is trained using binary cross-entropy loss Loss_g between G and G^label
 
-**Loss Function**
+## **`Loss Function`**
 
 $$Loss_{g} = -\sum_{i=1}^{n+l}\;[\;g^{l}_{i} \times log\; g_{i} \;+\; (1-g^{l}_{i})\;\times\;log\;(1-g_{i})\;] $$
 
@@ -176,10 +170,14 @@ $$Memory \;\; readout \; = \; q^{K+1}$$
 ## 2.3  Local Memory Decoder
 
 ![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/4.png)</center>
+Figure. Local memory decoder
 
 - From the **Global memory encoder**, we found
 
-![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-5820d9e6-c498-4043-bb1b-8b88f3f0f059.png)</center>
+$$Econded \;\;dialogue\;\; history\;\; h^{e}_{n}\\
+Encoded\;\;KB\;\;information\;\;q^{K+1} \\
+Global\;\;memory\;\;pointer\;\;G $$
+
 
 1. **Local memory decoder** —> initializes its **sketch RNN** using the concatenation of the ***h_n*** and ***q^K+1***
 2. This generates a **sketch response** with the ***sketch tags*** but ***without slot values***
@@ -213,13 +211,13 @@ $$Loss\_{v} =\sum_{t=1}^{m} -log(P^{vocab}_{t}\;(y^{s}_{t}))$$
 - We replace the slot values in ***Y*** into sketch tags based on the provided entity table.
 - The ***sketch tags (ST)*** are all possible slot types that start with a special token, for exampel, **@*address*** stands for all the address information
 
-**`Local Memory Pointer`**
+**Local Memory Pointer**
 
 Local memory pointer contains a **sequence of pointers,**
 
 $$L=(L_{1},....\;L_{m})$$
 
-![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/5.png)</center>
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-51536bb6-c71a-4d44-89fb-b3c28c254ba2.png)</center>
 
 - At each time step t, the **global memory pointer *G*** modifies the ***global contextual representation*** using its attnetion weights
 
@@ -228,9 +226,9 @@ $$c^{k}_{i} = c^{k}_{i}\; \times \;g_{i} \;\;\;\;\;\;\;\forall \; i \in [1,\; n+
 - And then the sketch RNN hidden state ***h_d*** queires the external knowledge.
 - The **memory attention** in the **last hop** is the corresponding **local memory pointer** ***L_t*** which is represneted as the memory distribution at time step t
 
-![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-08753954-421a-43c1-abca-f6e2f7c461eb.png)</center>
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/8.png)</center>
 
-Figure. The representation of "***local memory pointer*** as the memory attention in the last hop
+Figure. The representation of "***local memory pointer*** as the memory attention in the last hop (Here, p^K is L^t)
 
 - To train the local memory pointer, a supervision on top of the last hop memory attention in the external knowledge is added.
 - We first define the ***position label*** of local memory pointer  ***L_label*** at the decoding time step t as
@@ -260,9 +258,9 @@ $$Loss = \alpha \;Loss_g + \beta\;Loss_v\;+\gamma\;Loss_l$$
 - Datasets
     - bABI dialogue (Bordes & Watson, 2017)
 
-    - Includes 5 simulated tasks in the restaurant domain
+     -     Includes 5 simulated tasks in the restaurant domain
 
-     - Task 1-4 are about
+     -     Task 1-4 are about
 
               1.  calling API calls
 
@@ -282,9 +280,9 @@ $$Loss = \alpha \;Loss_g + \beta\;Loss_v\;+\gamma\;Loss_l$$
 
     - Stanford multi-domain dialogue (**SMD**)
 
-            -    Human-Human and  multi-domain doalogue dataset
+            - Human-Human and  multi-domain doalogue dataset
 
-            -    **Three** distinct domains
+            - **Three** distinct domains
 
                 1.  Calendar scheduling
 
@@ -294,13 +292,13 @@ $$Loss = \alpha \;Loss_g + \beta\;Loss_v\;+\gamma\;Loss_l$$
 
 
 
-**Result**
+**Results**
 
-![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-b041641d-8b46-4ebf-8ebc-a255bcae69e4.png)</center>
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-b041641d-8b46-4ebf-8ebc-a255bcae69e4.png)
 
 Per-response accuracy and completion rate (in the parentheses) on bAbI dialogues. GLMP achieves the least out-of-vocabulary performance drop. Baselines are reported from Query Reduction Network (Seo et al., 2017), End-to-end Memory Network (Bordes & Weston, 2017), Gated Memory Network (Liu & Perez, 2017), Point to Unknown Word (Gulcehre et al., 2016), and Memory-to-Sequence (Madotto et al., 2018)
 
-![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-9208b428-1c07-4f4c-b7df-b16fe50b3b02.png)</center>
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-9208b428-1c07-4f4c-b7df-b16fe50b3b02.png)
 
 In SMD dataset, our model achieves highest BLEU score and entity F1 score over baselines, including previous state-of-the-art result from Madotto et al. (2018).
 
@@ -308,7 +306,7 @@ In SMD dataset, our model achieves highest BLEU score and entity F1 score over b
 
 - The contributions of the **global memory pointer G** and the **memory writing of dialogue histroy H** are investigated for bABI OOv task and SMD (K=1)
 
-![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-80866f8f-bc79-43dd-b760-683d3ee0502e.png)</center>
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-80866f8f-bc79-43dd-b760-683d3ee0502e.png)
 
 Ablation study using single hop model. Note a 0.4% increase in T5 suggests that the ***use of G may impose too strong prior entity probability***
 
