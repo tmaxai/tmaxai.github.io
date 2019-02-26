@@ -169,7 +169,7 @@ $$Memory \;\; readout \; = \; q^{K+1}$$
 
 ## 2.3  Local Memory Decoder
 
-![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/4.png)</center>
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/5.png)
 Figure. Local memory decoder
 
 - From the **Global memory encoder**, we found
@@ -217,7 +217,8 @@ Local memory pointer contains a **sequence of pointers,**
 
 $$L=(L_{1},....\;L_{m})$$
 
-![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-51536bb6-c71a-4d44-89fb-b3c28c254ba2.png)</center>
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/7.png)
+Figure. Local memory decode
 
 - At each time step t, the **global memory pointer *G*** modifies the ***global contextual representation*** using its attnetion weights
 
@@ -226,7 +227,7 @@ $$c^{k}_{i} = c^{k}_{i}\; \times \;g_{i} \;\;\;\;\;\;\;\forall \; i \in [1,\; n+
 - And then the sketch RNN hidden state ***h_d*** queires the external knowledge.
 - The **memory attention** in the **last hop** is the corresponding **local memory pointer** ***L_t*** which is represneted as the memory distribution at time step t
 
-![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/8.png)</center>
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/8.png)
 
 Figure. The representation of "***local memory pointer*** as the memory attention in the last hop (Here, p^K is L^t)
 
