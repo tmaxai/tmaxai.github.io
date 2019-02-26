@@ -287,7 +287,7 @@ $$Loss = \alpha \;Loss_g + \beta\;Loss_v\;+\gamma\;Loss_l$$
 
      
 
-![](/assets/img/019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/SMD_data_capture.png)
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/SMD_data_capture.png)
 
                                           Example of SMD dataset
 
