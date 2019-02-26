@@ -10,6 +10,8 @@ author: robinsongh381
 
 > *End-to-end task TODS is challenging since knowledge bases are usually large, dynamic hard to incorporate into  a learning framework. We propose the global-to-local memory pointer **(GLMP)** networks to address this issue.   [[Paper](https://openreview.net/pdf?id=ryxnHhRqFm)*]
 
+## 1.  Introduction
+
 - **Three** main components
     1. Global memory encoder
     2. Local memory decoder
@@ -104,7 +106,7 @@ $$o^{k} = \sum_{i}p^{k}_{i}c^{k+1}_{i}\; , \;\; \; \;\;\;\; q^{k+1}=q^{k}+o^{k}$
 
 ## 2.2  Global Memory Pointer
 
-![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/6.png)</center>
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/6.png)
 Figure. Global memory encoder
 
 1. **Context RNN** is used to model the ***sequential dependenc**y* and **encode** the ***context X***
@@ -219,7 +221,7 @@ Local memory pointer contains a **sequence of pointers,**
 $$L=(L_{1},....\;L_{m})$$
 
 ![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/7.png)
-Figure. Local memory decode
+Figure. Local memory decoder
 
 - At each time step t, the **global memory pointer *G*** modifies the ***global contextual representation*** using its attnetion weights
 
@@ -260,9 +262,9 @@ $$Loss = \alpha \;Loss_g + \beta\;Loss_v\;+\gamma\;Loss_l$$
 - Datasets
     - bABI dialogue (Bordes & Watson, 2017)
 
-     -     Includes 5 simulated tasks in the restaurant domain
+       - Includes 5 simulated tasks in the restaurant domain
 
-     -     Task 1-4 are about
+       - Task 1-4 are about
 
               1.  calling API calls
 
@@ -272,7 +274,7 @@ $$Loss = \alpha \;Loss_g + \beta\;Loss_v\;+\gamma\;Loss_l$$
 
               4.  providing additional information
 
-     -    Task 5 is the **union** of Tasks 1-4
+       - Task 5 is the **union** of Tasks 1-4
 
     - Two test sets for each task  —  one follows the **same distribution as the training set** and the other has **OOV entity values**
 
