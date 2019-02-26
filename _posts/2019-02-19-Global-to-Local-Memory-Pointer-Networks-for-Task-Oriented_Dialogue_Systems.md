@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Review] Global to Local Memory Pointer Networks for Task Oriented Dialogue Systems"
+title: "Global to Local Memory Pointer Networks for Task Oriented Dialogue Systems"
 date: 2019-02-19
 categories: [Paper Review]
 tags: [NLP, Memory Network, End-to-End Dialogue Systems]
