@@ -16,7 +16,10 @@ author: robinsongh381
     2. Local memory decoder
     3. Shared external knowledge
 
-    ![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/2019-02-1210-f72d3bf5-eda1-45be-85bf-8745d62a32f8.46.12.png)
+    ![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/1.png)
+
+Figure 1: The proposed (a) global-to-local memory pointer networks for task-oriented dialogue systems and the (b) external knowledge architecture.
+
 
 - **Global memory pointer** modifies  the external knowledge
 - The **local memory decoder** first uses a **sketch RNN** to obtain sketch responses *without slot values*
@@ -38,12 +41,12 @@ $$Y = ( y_{1},..., y_{m})$$
 
 - Model Outline
     1. The global memory uses a context RNN to encode dialogue history.
-    2. Then, the l**ast hidden state** is used to read the external knowledge and generate the **global memory pointer**  
-    3. During the decoding stage, the local memory decoder first generates sketch responses by a **sketch RNN.**  
-    4. Then the global memory pointer and the sketch RNN hidden state are passed to the external knowledge as a **filter** and a **query**  
-    5. The local memory pointer can copy text from the external knowledge to replace the sketch RNN tags and obtain the final system response                            
+    2. Then, the l**ast hidden state** is used to read the external knowledge and generate the **global memory pointer**
+    3. During the decoding stage, the local memory decoder first generates sketch responses by a **sketch RNN.**
+    4. Then the global memory pointer and the sketch RNN hidden state are passed to the external knowledge as a **filter** and a **query**
+    5. The local memory pointer can copy text from the external knowledge to replace the sketch RNN tags and obtain the final system response
 
-                             
+
 
 ## 2.1  External Knowledge
 
@@ -51,23 +54,25 @@ Two functions — **`global contextual representation`** and  **`Knowledge read 
 
 **`Global Contextual Representation`**
 
- External Knowledge contains `global contextual representation` that is ***shared*** with the **encoder** and the **decoder.**
+ External Knowledge contains ***global contextual representation*** that is ***shared*** with the **encoder** and the **decoder.**
 
  **End-to-end memory networks**  are used to store word-level information for **KB memory** and **Dialogue memory**
 
 - KB memory
 
-    Each element in ***B*** is represented in the ***triplet form*** as ***(Subject, Relation, Object)***
+  - Each element in ***B*** is represented in the ***triplet form*** as ***(Subject, Relation, Object)***
 
 - Dialogue memory
 
-    The dialogue context ***X*** is stored in the ***dialogue memory module***, as a **triplet form**
+  - The dialogue context ***X*** is stored in the ***dialogue memory module***, as a **triplet form**
 
-![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/2019-02-159-f3550334-1242-4a1a-91b2-7136ef3e6e6f.58.55.png)
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/2.png)
+
+Table 1: An in-car assistant example on the navigation domain. The left part is the KB informationand the right part is the conversation between a driver and our system
 
 **Triplet KB** :              {(*Tom's house, distance, **3 miles***) , .. , (*Starbucks, address, **792 Bedoin St***)}
 
-**Triplet Dialogue** :    {(*$user, turn1, I*) , ($user, turn1, need), ($user, turn1, gas) ... )}
+**Triplet Dialogue** :    {($user, turn1, I), ($user, turn1, need), (user , turn1, gas) ... )}
 
 - For the ***two*** memory modules, **a bag-of-word** representation is used as the memory embedding
 - During ***inference***, we copy the **object word**
@@ -82,11 +87,11 @@ Two functions — **`global contextual representation`** and  **`Knowledge read 
 
 $$  C = (C^{1}, ..., C^{K+1}) \\ where \\ C^{k} \in \mathbb{R}^{\left | V \right | \times d_{emb}} K \; is \; the \; maximum\; memory\; hop, \\  \left | V \right |\ is\; the\; vocabulary\; size\; and\; d_{emb}\; is\; the\; embedding\; dimension$$
 
-           
+
 
 - Denote ***memory*** in the external knowledge as
 
-$$M = [B; X] = (m_{1}, ...\ ,m_{n+l}) \\where\;  m_{i}\; is\; one\; of\; the\; triplets\ $$
+$$M = [B; X] = (m_{1}, ...\ ,m_{n+l}) \\where\;  m_{i}\; is\; one\; of\; the\; triplets $$
 
 - To read the memory, the external knowledge needs an **initial query vector *q_1***
 
@@ -94,7 +99,7 @@ $$M = [B; X] = (m_{1}, ...\ ,m_{n+l}) \\where\;  m_{i}\; is\; one\; of\; the\; t
 
     $$p^{k}_{i}= Softmax((q^{k})^{T} c^{k}_{i})\\where\\c^{k}_{i} =B(C^{k}(m_{i})) \in \mathbb{R}^{d_{emb}} is \; the\; embedding \; in \; i^{th}\; memory\; position, \\q^{k} is\; the\; query\; vector\; for\; hop\;  k,\; and\; B( \;) is \; the\; bag\;of\;word\; function$$
 
-     -  Note that the ***attention weight***, ***p***,  is a soft memory attention that decides the 
+     -  Note that the ***attention weight***, ***p***,  is a soft memory attention that decides the
         memory relevance w.r.t the query vector
 
 - Then the model reads out the memory ***o*** by the weighted sum over ***c*** and update the query vector ***q***
@@ -103,7 +108,9 @@ $$o^{k} = \sum_{i}p^{k}_{i}c^{k+1}_{i}\; , \;\; \; \;\;\;\; q^{k+1}=q^{k}+o^{k}$
 
 ## 2.2  Global Memory Pointer
 
-![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-427ed9b9-a4c7-4e31-8f8e-a4e879508523.png)
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/3.png)
+
+Figure 2(a) Global memory encoder
 
 1. **Context RNN** is used to model the ***sequential dependenc**y* and **encode** the ***context X***
 
@@ -113,24 +120,24 @@ $$o^{k} = \sum_{i}p^{k}_{i}c^{k+1}_{i}\; , \;\; \; \;\;\;\; q^{k+1}=q^{k}+o^{k}$
 
       - This can solve the above problem (*)
 
- 3.  The **last encoder hidden stat**e serves as the query to read the external knowledge and 
-      get two outputs — ***(a) global memory pointer*** and (***b) memory readout***  
+ 3.  The **last encoder hidden stat**e serves as the query to read the external knowledge and
+      get two outputs — ***(a) global memory pointer*** and (***b) memory readout***
 
- 
 
-**`Context RNN`**
+
+**Context RNN**
 
 - **GRU** is used to encode the dialogue history into the hidden states
 
 $$H = (h^{e}_{1},\; ...\; , h^{e}_n)$$
 
-      - and the last hidden state ***h_n*** is used to query the **external knowledge** as the **encoded the dialogue history** 
+- The last hidden state ***h_n*** is used to query the **external knowledge** as the **encoded the dialogue history**
 
 - The hidden states ***h is added*** to the original memory representation
 
 $$c^{K}_{i} = c^{K}_{i} + h^{e}_{m_{i}}\;\;\;\;\; if\;\; m_{i} \in X \;\; and \;\;\;\forall\;k\;\in\;[1,K+1]   $$
 
-**`Global Memory Pointer`**
+**Global Memory Pointer**
 
 - Global memory pointer is a vector containing real values between 0 and 1.
 
@@ -140,9 +147,9 @@ $$G = (g_{1},...,\;g_{n+l})$$
 
 - Query the external knowledge using ***h_n*** until the last hop
 
-      - take an **inner product** 
+    - take an **inner product**
 
-      - followed by the **Sigmoid function**
+    - followed by the **Sigmoid function**
 
     $$g_{i} = Sigmoid((q^{K})^{T} c^{K}_{i})$$
 
@@ -154,11 +161,11 @@ $$G^{label} = (g_{1}^{l},...\;g_{n+l}^{l})\;\;\;\;\;\;\; where\;\;\;\;\;\;\;\;\;
 
 ![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-413b380d-f90d-4f34-af5b-d15ffde4aa62.png)
 
-           							    Figure 3. The process of modelling the loss function
+Figure 3. The process of modelling the loss function
 
 - Then the global memory pointer is trained using binary cross-entropy loss Loss_g between G and G^label
 
-## **`Loss Function`**
+**Loss Function**
 
 $$Loss_{g} = -\sum_{i=1}^{n+l}\;[\;g^{l}_{i} \times log\; g_{i} \;+\; (1-g^{l}_{i})\;\times\;log\;(1-g_{i})\;] $$
 
@@ -168,7 +175,7 @@ $$Memory \;\; readout \; = \; q^{K+1}$$
 
 ## 2.3  Local Memory Decoder
 
-![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-51536bb6-c71a-4d44-89fb-b3c28c254ba2.png)
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/4.png)
 
 - From the **Global memory encoder**, we found
 
@@ -183,12 +190,12 @@ $$Memory \;\; readout \; = \; q^{K+1}$$
 
     (b) Serve as a vector to query the external knowledge
 
-     -   If a ***sketch tag*** is generated, ***G*** is passed to the ***external knowledge*** and the expected output word will be 
+     -   If a ***sketch tag*** is generated, ***G*** is passed to the ***external knowledge*** and the expected output word will be
          picked up from the ***local memory pointer***
 
      -   Otherwise the output word is the word that generated by the sketch RNN ***(S2S)***
 
-**`Sketch RNN`**
+**Sketch RNN**
 
 Use **GRU** to generate a ***sketech reponse*** ***Y,*** without ***real slot values***
 
@@ -208,7 +215,7 @@ $$Loss\_{v} =\sum_{t=1}^{m} -log(P^{vocab}_{t}\;(y^{s}_{t}))$$
 
 **`Local Memory Pointer`**
 
-Local memory pointer contains a **sequence of pointers,** 
+Local memory pointer contains a **sequence of pointers,**
 
 $$L=(L_{1},....\;L_{m})$$
 
@@ -243,7 +250,7 @@ $$Loss_{l} = \sum_{t=1}^{m}-log(L_{t}(L_{t}^{label}))$$
 
 $$\hat{y_{t}} = \begin{Bmatrix} argmax(P_{t}^{vocab}) \;\; if\;\; argmax(P^{vocab}_{t}\;\notin ST\\ Obeject(m_{argmax)(L\bigodot R)}\;\;\;\;\;\; \;\; otherwise \end{Bmatrix} \\\;\\\\\\where, \;\;\bigodot is \;\;the\;\;element-wise\;\;multiplication$$
 
-- Lastly, all the parameters are jointly trained by minimizing the **weighted-sum of three losses**                              
+- Lastly, all the parameters are jointly trained by minimizing the **weighted-sum of three losses**
 (α, β, γ are hyper-parameters)
 
 $$Loss = \alpha \;Loss_g + \beta\;Loss_v\;+\gamma\;Loss_l$$
@@ -253,9 +260,9 @@ $$Loss = \alpha \;Loss_g + \beta\;Loss_v\;+\gamma\;Loss_l$$
 - Datasets
     - bABI dialogue (Bordes & Watson, 2017)
 
-     -     Includes 5 simulated tasks in the restaurant domain
+    - Includes 5 simulated tasks in the restaurant domain
 
-     -     Task 1-4 are about 
+     - Task 1-4 are about
 
               1.  calling API calls
 
@@ -277,7 +284,7 @@ $$Loss = \alpha \;Loss_g + \beta\;Loss_v\;+\gamma\;Loss_l$$
 
             -    Human-Human and  multi-domain doalogue dataset
 
-            -    **Three** distinct domains 
+            -    **Three** distinct domains
 
                 1.  Calendar scheduling
 
@@ -285,13 +292,9 @@ $$Loss = \alpha \;Loss_g + \beta\;Loss_v\;+\gamma\;Loss_l$$
 
                 3.  Point-of-interest navigation
 
-     
 
-![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/SMD_data_capture.png)
 
-                                         						 Example of SMD dataset
-
-**`Results`**
+**Result**
 
 ![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-b041641d-8b46-4ebf-8ebc-a255bcae69e4.png)
 
@@ -315,4 +318,3 @@ Ablation study using single hop model. Note a 0.4% increase in T5 suggests that 
 - The ***global memory encoder*** and the ***local memory decoder*** are designed to incorporate the **shared external knowledge** into the learning framework.
 - We empirically show that the global and the local memory pointer are able to effectively produce system responses even in the ***out-of-vocabulary scenario***, and visualize how global memory pointer helps as well.
 - As a result, our model achieves **state-of-the-art** results in both the simulated and the ***human-human dialogue*** datasets, and holds potential for extending to other tasks such as *question answering* and *text summarization*.
-
