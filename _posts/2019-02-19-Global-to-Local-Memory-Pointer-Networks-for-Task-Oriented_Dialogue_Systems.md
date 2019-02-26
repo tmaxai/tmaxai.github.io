@@ -1,15 +1,13 @@
+---
+layout: post
+title: "[Review] Global to Local Memory Pointer Networks for Task Oriented Dialogue Systems"
+date: 2019-02-19
+categories: [Paper Review]
+tags: [NLP, Memory Network, End-to-End Dialogue Systems]
+author: robinsongh381
+---
+
 # Global to Local Memory Pointer Networks for Task Oriented Dialogue Systems
-
----
-    layout: post
-    title: "[Review] Global to Local Memory Pointer Networks for Task Oriented Dialogue Systems"
-    date: 2019-02-19
-    categories: [Review]
-    tags: [NLP, Dialogue Systems, End-to-End]
-    author: robinsongh381
-    ---
-
----
 
 > *End-to-end task TODS is challenging since knowledge bases are usually large, dynamic hard to incorporate into  a learning framework. We propose the global-to-local memory pointer **(GLMP)** networks to address this issue.   [[Paper](https://openreview.net/pdf?id=ryxnHhRqFm)*]
 
