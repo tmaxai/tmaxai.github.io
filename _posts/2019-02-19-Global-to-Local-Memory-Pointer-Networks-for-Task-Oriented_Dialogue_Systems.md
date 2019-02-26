@@ -91,7 +91,7 @@ $$  C = (C^{1}, ..., C^{K+1}) \\ where \\ C^{k} \in \mathbb{R}^{\left | V \right
 
 $$M = [B; X] = (m_{1}, ...\ ,m_{n+l}) \\where\;  m_{i}\; is\; one\; of\; the\; triplets $$
 
-- To read the memory, the external knowledge needs an **initial query vector *q_1**
+- To read the memory, the external knowledge needs an **initial query vector q_1**
 
     - It can loop over **K hops** and computes the attention weights at each hop *k* using
 
@@ -212,7 +212,7 @@ $$h^{d}_{t}\; = \;GRU(C^{1}\;(\widehat{y}_{t-1}),\;h^{d}_{t-1}), \;\;\;\;\;P^{vo
 $$Loss\_{v} =\sum_{t=1}^{m} -log(P^{vocab}_{t}\;(y^{s}_{t}))$$
 
 - We replace the slot values in **Y** into sketch tags based on the provided entity table.
-- The **sketch tags (ST)** are all possible slot types that start with a special token, for exampel, **@*address** stands for all the address information
+- The **sketch tags (ST)** are all possible slot types that start with a special token, for exampel, **@address** stands for all the address information
 
 **Local Memory Pointer**
 
@@ -223,7 +223,7 @@ $$L=(L_{1},....\;L_{m})$$
 ![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/7.png)
 Figure 5. Local memory decoder
 
-- At each time step t, the **global memory pointer *G** modifies the **global contextual representation** using its attnetion weights
+- At each time step t, the **global memory pointer G** modifies the **global contextual representation** using its attnetion weights
 
 $$c^{k}_{i} = c^{k}_{i}\; \times \;g_{i} \;\;\;\;\;\;\;\forall \; i \in [1,\; n+l]\;\; and\;\; \forall k\; \in\;[1,\;K+1]  $$
 
@@ -260,39 +260,38 @@ $$Loss = \alpha \;Loss_g + \beta\;Loss_v\;+\gamma\;Loss_l$$
 ## 3  Experiments
 
 - Datasets
-    - bABI dialogue (Bordes & Watson, 2017)
+  - bABI dialogue (Bordes & Watson, 2017)
 
-       - Includes 5 simulated tasks in the restaurant domain
+    - Includes 5 simulated tasks in the restaurant domain
 
-       - Task 1-4 are about
+      - Task 1-4 are about
 
-              1.  calling API calls
+        1. calling API calls
 
-              2.  modifying API calls
+        2.  modifying API calls
 
-              3.  recommeding options
+        3.  recommeding options
 
-              4.  providing additional information
+        4.  providing additional information
 
-       - Task 5 is the **union** of Tasks 1-4
-
+    - Task 5 is the **union** of Tasks 1-4
     - Two test sets for each task  —  one follows the **same distribution as the training set** and the other has **OOV entity values**
 
     ![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/Untitled-48c0d3c4-9a54-4f76-95e4-f3b2e8f54010.png)
 
     Table 2. Example of Task 3 from bABI dialogue dataset ([https://github.com/IBM/permuted-bAbI-dialog-tasks](https://github.com/IBM/permuted-bAbI-dialog-tasks))
 
-    - Stanford multi-domain dialogue (**SMD**)
+  - Stanford multi-domain dialogue (**SMD**)
 
-            - Human-Human and  multi-domain doalogue dataset
+    - Human-Human and  multi-domain doalogue dataset
 
-            - **Three** distinct domains
+    - **Three** distinct domains
 
-                1.  Calendar scheduling
+      1.  Calendar scheduling
 
-                2.  Weather information retrieval
+      2.  Weather information retrieval
 
-                3.  Point-of-interest navigation
+      3.  Point-of-interest navigation
 
 
 
