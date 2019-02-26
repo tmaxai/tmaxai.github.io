@@ -16,8 +16,9 @@ x
     2. Local memory decoder
     3. Shared external knowledge
 
- ![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/2019-02-1210-f72d3bf5-eda1-45be-85bf-8745d62a32f8.46.12.png)
-
+ ![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/table1.png)
+ Figure. The proposed (a) global-to-local memory pointer networks for task-oriented dialogue
+systems and the (b) external knowledge architecture
 - **Global memory pointer** modifies  the external knowledge
 - The **local memory decoder** first uses a **sketch RNN** to obtain sketch responses *without slot values*
 - The decoder generates **local memory pointer** to copy words from external knowledge and instantiate sketch tags
@@ -63,7 +64,8 @@ Two functions — **`global contextual representation`** and  **`Knowledge read 
 
     The dialogue context ***X*** is stored in the ***dialogue memory module***, as a **triplet form**
 
-![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/2019-02-159-f3550334-1242-4a1a-91b2-7136ef3e6e6f.58.55.png)
+![](/assets/img/2019-02-19-Global-to-Local-Memory-Pointer-Networks-for-Task-Oriented_Dialogue_Systems/table2.png)
+Table. An in-car assistant example on the navigation domain. The left part is the KB information and the right part is the conversation between a driver and our system
 
 **Triplet KB** :              {(*Tom's house, distance, **3 miles***) , .. , (*Starbucks, address, **792 Bedoin St***)}
 
