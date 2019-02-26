@@ -75,7 +75,7 @@ Table1. An in-car assistant example on the navigation domain. The left part is t
 - For the **two** memory modules, **a bag-of-word** representation is used as the memory embedding
 - During **inference**, we copy the **object word**
 
-     -   For example, **3 miles** will be copied to **(*Tom's house, distance, 3 miles*)** is selected
+     -   For example, **3 miles** will be copied to **(Tom's house, distance, 3 miles)** is selected
 
      -   Here **Object( . )** denotes the function as getting the object word from a triplet
 
