@@ -111,12 +111,12 @@ Figure2. Global memory encoder
 
   - End-to-end MN cannot reflect the **dependencies** between memories (*)
 
- 2.  The **hidden states** are written into the external knowledge as shown in **Figure 2**
+2.  The **hidden states** are written into the external knowledge as shown in **Figure 2**
 
   - This can solve the above problem (*)
 
- 3.  The **last encoder hidden stat**e serves as the query to read the external knowledge and
-      get two outputs — **(a) global memory pointer** and (**b) memory readout**
+3.  The **last encoder hidden stat**e serves as the query to read the external knowledge and
+      get two outputs — **(a) global memory pointer** and **(b) memory readout**
 
 
 
