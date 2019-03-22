@@ -23,11 +23,11 @@ author: jhlee0427
 ![image desc](/assets/img/2019-02-19-review_SphereFace/SphereFace_fig_6.png)
 
 * binary class를 구분한다고 가정했을 때, weights $$W_i$$와 bias $$b_i$$를 가진 softmax loss의 deicision boundary는 
-$$(W_1-W2)x+b_1-b_2=0$$로 볼 수 있다. 이를 반지름이 1인 구(Sphere)로 매핑했을 때 $$||W_1||=||W_2||=1, b_1=b_2=0$$이므로 decision boundary는 $$||x||(cos(\theta_1)-cos(\theta_2))=0$$로 표현 될 수 있다. 
+$$(W_1-W2)x+b_1-b_2=0$$로 볼 수 있다. 이를 반지름이 1인 구(Sphere)로 매핑했을 때 $$\Vert W_1\Vert =\Vert W_2\Vert =1, b_1=b_2=0$$이므로 decision boundary는 $$\Vert x\Vert (cos(\theta_1)-cos(\theta_2))=0$$로 표현 될 수 있다. 
 * 따라서 만약 우리가 weights와 bias를 
-$$(||W_i||=1, b_i=0)$$
+$$(\Vert W_i\Vert =1, b_i=0)$$
 으로 normalize한다면 들어오는 인풋이미지 x에 대해서 각각 class의 posterior probabilities는 
-$$p_1=||x||cos(\theta_1),p_2=||x||cos(\theta_2)$$
+$$p_1=\Vert x\Vert cos(\theta_1),p_2=\Vert x\Vert cos(\theta_2)$$
 로 표현 할 수 있다. 이에따라 클래스를 구분짓는 
 $$\theta_i$$는 $$W_i$$와 $$x$$사이의 각인 
 $$\theta_1$$과 $$\theta_2$$에 따라 결정된다.
@@ -35,44 +35,23 @@ $$\theta_1$$과 $$\theta_2$$에 따라 결정된다.
 
 * 그리고
 $$f_j$$
-는 $$f_j=W^T_jx=||W_j|| ||x||cos\theta_j$$이다. 이를 이용해 수정하면
+는 $$f_j=W^T_jx=\Vert W_j\Vert  \Vert x\Vert cos\theta_j$$이다. 이를 이용해 수정하면
 
 * modified softmax loss는 
-$$L_{modified}=\frac{1}{N}\sum_i-log(\frac{\exp^{||x_i||cos(\theta_{y_i,i})}}{\sum_j\exp^{||x_i||cos(\theta_{j,i})}})$$
+$$L_{modified}=\frac{1}{N}\sum_i-log(\frac{\exp^{\Vert x_i\Vert cos(\theta_{y_i,i})}}{\sum_j\exp^{\Vert x_i\Vert cos(\theta_{j,i})}})$$
 이 된다. 이를 Normalized version of Softmax Loss(NSL)이라고도 한다.
 
 * Angular-softamx loss 에선 클래스 1 과 클래스 2의 m margin을 갖는 decision boundary는 
-$$||x||(cos(m\theta_1)-cos(\theta_2))=0$$
+$$\Vert x\Vert (cos(m\theta_1)-cos(\theta_2))=0$$
 그리고 
-$$||x||(cos(\theta_1)-cos(m\theta_2))=0$$
+$$\Vert x\Vert (cos(\theta_1)-cos(m\theta_2))=0$$
 로 표현 할 수 있다. 
 
-| Softmax | NSL | A-Softmax | LMCL |   |
-|---------|-----|-----------|------|---|
-| 11      | 22  | 33        | 44   |   |
-|         |     |           |      |   |
-|         |     |           |      |   |
+| Softmax | $$\Vert W_1\Vert cos(\theta_1)=\Vert W_2\Vert cos(\theta_2)$$ |
+| NSL | $$cos(\theta_1)=cos(\theta_2)$$ |
+| A-Softmax | $$C_1:\Vert x\Vert (cos(m\theta_1)-cos(\theta_2))>=0,\\ C_2:\Vert x\Vert (cos(\theta_1)-cos(m\theta_2))<=0$$ |
+| LMCL | $$C_1:\Vert x\Vert (cos(\theta_1)-cos(\theta_2))>=m,\\ C_2:\Vert x\Vert (cos(\theta_1)-cos(\theta_2))<=m $$ |
 
-| Softmax                                       | NSL                             | A-Softmax                                                                                     | LMCL                                                                                         |
-|-----------------------------------------------|---------------------------------|-----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
-| $$||W_1||cos(\theta_1)=||W_2||cos(\theta_2)$$ | $$cos(\theta_1)=cos(\theta_2)$$ | $$C_1:||x||(cos(m\theta_1)-cos(\theta_2))>=0,\\  C_2:||x||(cos(\theta_1)-cos(m\theta_2))<=0$$ | $$C_1:||x||(cos(\theta_1)-cos(\theta_2))>=m,\\  C_2:||x||(cos(\theta_1)-cos(\theta_2))<=m $$ |
-
-
-- Softmax
-
-$$||W_1||cos(\theta_1)=||W_2||cos(\theta_2)$$
-
-- NSL
-
-$$cos(\theta_1)=cos(\theta_2)$$
-
-- A-Softmax
-
-$$C_1:||x||(cos(m\theta_1)-cos(\theta_2))>=0,\\ C_2:||x||(cos(\theta_1)-cos(m\theta_2))<=0$$
-
-- LMCL
-
-$$C_1:||x||(cos(\theta_1)-cos(\theta_2))>=m,\\ C_2:||x||(cos(\theta_1)-cos(\theta_2))<=m $$
 
 A-Softmax에서는 들어온 인풋이미지의 클래스1이 다른 모든 클래스와의 각도 $$\theta$$보다 m배 축소된 각도내로 제한 시켜서 W를 학습한다.
 m은 4가 제일 좋다고 한다.
