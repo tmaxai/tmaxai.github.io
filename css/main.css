@@ -68,12 +68,20 @@ nav ul {
     padding: 0px;
     float: right;
 }
-nav ul li {
-    font-size: 16px;
+nav .nav-item{
     margin: 0 48px 0 0;
     padding: 0 0 0 0;
     border : 0;
     float: left;
+}
+nav .nav-item a{
+    font-size: 16px;
+    color: #333333
+}
+nav .nav-item a:hover{
+    font-size: 16px;
+    text-decoration: underline;
+    color: #394889
 }
 .heading {
     font-family: "Jeju Gothic", serif;

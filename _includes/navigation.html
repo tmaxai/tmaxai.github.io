@@ -3,35 +3,14 @@
   <!-- homepage logo -->
   <a href="/"><img style="height: 20px; float: left" src="/assets/img/icon/TmaxAI.png"/></a>
   <!-- search button -->
-  <img style="height: 20px; float: right" src="/assets/img/icon/search_button.png"/>
+  <a href="/search/index.html"><img style="height: 20px; float: right" src="/assets/img/icon/search_button.png"/></a>
   <!-- navigation item -->
   <ul>
-    <li>Tutorial</li>
-    <li>Tmax Research</li>
-    <li>Tags</li>
-    <li>About Us</li>
-  </ul>
-
-</nav>
-<!--
-<div id="nav_container">
-<nav>
-{% unless page.layout == 'front' %}
-<ul>
-<h1><a href="{{ site.url }}">{{ site.title }}</a></h1>
-  {% for link in site.navigation %}
-    {% assign current = nil %}
-    {% if page.url == link.url or page.layout == link.layout %}
-      {% assign current = 'current' %}
-    {% endif %}
-
-    <li class="{{ current }}">
-      <a class="{{ current }}" href="{{ site.url }}{{ link.url }}">{{ link.text }}</a>
+    {% for page in site.navigation %}
+    <li class="nav-item">
+      <a href="{{ site.url }}{{ page.url }}">{{ page.text }}</a>
     </li>
-  {% endfor %}
-</ul>
-{% endunless %}
+    {% endfor %}
+  </ul>
 </nav>
-</div>
--->
 </header>
