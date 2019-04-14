@@ -71,6 +71,25 @@ nav .nav-item a:hover{
     text-decoration: underline;
     color: #394889
 }
+#pagination {
+    width: 790px;
+    margin-top: 60px;
+    float: left;
+}
+/* Side bar */
+#side-bar {
+    width: 250px;
+    list-style: none;
+    float: right;
+    margin:0px;
+    padding: 0px;
+}
+#side-bar li {
+    margin: 80px 0 0 0;
+    /* please remove this */
+    height: 400px;
+    background: #88c2c2;
+}
 .heading {
     font-family: "Jeju Gothic", serif;
     font-weight: 600;
