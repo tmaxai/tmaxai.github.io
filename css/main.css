@@ -38,8 +38,7 @@ h6 {
     line-height: 1.6em;
 }
 header {
-    padding-bottom: 20px;
-    padding-top: 20px;
+    padding: 0px;
 }
 header h1 {
     padding-top: 1em;
@@ -58,14 +57,6 @@ header h1 a {
 header h1 a:hover {
     color: #76a0dd;
 }
-#nav_container {
-	width: 90%;
-	max-width: 950px;
-    margin-left: auto;
-    margin-right: auto;
-	padding-right: 32px;
-	padding-left: 32px;
-}
 #current {
     background-color: #b91414;
 }
@@ -73,32 +64,37 @@ header h1 a:hover {
     height: 440px;
 }
 nav {
-    font-weight: 200;
-    font-family: -apple-system, Roboto, Helvetica, Arial;
-    text-transform: uppercase;
-    margin-left: -43px;
-	margin-bottom: -20px;
-	margin-top: -15px;
+    width: 1100px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
-nav ul li {
-    display: inline;
-    color: #9f9f9f;
-	font-size: 105%;
+nav ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    float: right;
 }
-nav ul li a {
-    color: #324787;
-    padding: 8px 9px;
-    margin: 0 -10px 0px;
-    text-transform: uppercase;
+nav .nav-item{
+    margin: 0 48px 0 0;
+    padding: 0 0 0 0;
+    border : 0;
+    float: left;
 }
-nav ul li a:hover {
-    color: #ffffff;
-    background-color: #000000;
+nav .nav-item a{
+    font-size: 16px;
+    color: #333333
+}
+nav .nav-item a:hover{
+    font-size: 16px;
+    text-decoration: underline;
+    color: #394889
 }
 .heading {
     font-family: "Jeju Gothic", serif;
     font-weight: 600;
-    font-size: 22px
+    font-size: 22px;
     text-transform: uppercase;
     margin-top: 1.2em;
     margin-bottom: 1.3em;
