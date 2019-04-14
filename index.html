@@ -7,6 +7,7 @@ group: navigation
 <!-- slide banner -->
 <img id="slide_banner" src="/assets/img/icon/banner_sample.jpg"/>
 
+<section id="main">
   {% for post in paginator.posts %}
     <article>
     <div class="heading"><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></div>
@@ -37,3 +38,4 @@ group: navigation
       <li class="next"><a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older &rarr;</a></li>
   {% endif %}
 </ul>
+</section>

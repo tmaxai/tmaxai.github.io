@@ -1,18 +1,18 @@
+<html>
 {% include analytics.html %}
 {% include head.html %}
-{% include navigation.html %}
 
+<body>
+	<!-- navigation bar -->
+	{% include navigation.html %}
 
-<section id="main" class="site_padding">
 	<div style="min-height: 70vh;">
 	{{ content }}
 	</div>
+
+	<!-- footer -->
 	<hr>
 	{% include footer.html %}
-	<!-- 이미지 클릭할 때 확대하는 기능 관련 script-->
-	<script src="{{ site.url }}/assets/lib/jquery-1.12.0.min.js" type="text/javascript"></script>
-	<script src="{{ site.url }}/assets/lib/jquery.magnific-popup.min.js" type="text/javascript"></script>
-	<script src="{{ site.url }}/assets/js/index.js" type="text/javascript"></script>
-</section>
+
 </body>
 </html>
