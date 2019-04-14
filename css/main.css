@@ -64,6 +64,9 @@ header h1 a:hover {
 #current {
     background-color: #b91414;
 }
+#slide_banner {
+    height: 440px;
+}
 nav {
     font-weight: 200;
     font-family: -apple-system, Roboto, Helvetica, Arial;
@@ -90,7 +93,7 @@ nav ul li a:hover {
 .heading {
     font-family: "Jeju Gothic", serif;
     font-weight: 600;
-    font-size: 22px 
+    font-size: 22px
     text-transform: uppercase;
     margin-top: 1.2em;
     margin-bottom: 1.3em;
@@ -186,9 +189,9 @@ hr {
     height: 1px;
     border-style: none;
 }
-#main {
-    padding-right: 32px;
-    padding-left: 32px;
+.site_padding {
+    margin-left: auto;
+    margin-right: auto;
 }
 ul {
 	margin: 20px;
@@ -324,9 +327,7 @@ code {
 
     #main {
         width: 95%;
-		max-width: 1000px;
-        margin-left: auto;
-        margin-right: auto;
+		max-width: 1280px;
     }
     p {
         font-size: 0.95em;
@@ -338,9 +339,9 @@ code {
     	font-size: 0.9em;
     }
     .heading {
-	font-family: "Jeju Gothic", serif;
+	    font-family: "Jeju Gothic", serif;
     	font-weight: 600;
-	font-size: 22px 
+	    font-size: 22px
     }
     pre {
 		font-size: 0.8em;
