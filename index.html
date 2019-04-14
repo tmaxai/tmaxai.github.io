@@ -8,34 +8,50 @@ group: navigation
 <img id="slide_banner" src="/assets/img/icon/banner_sample.jpg"/>
 
 <section id="main" class="default-margin">
-  {% for post in paginator.posts %}
-    <article>
-    <div class="heading"><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></div>
-    <p class="meta"><a class="permalink" href="{{ site.baseurl }}{{ post.url }}">&#9679;</a> {{ post.date | date_to_string }}</p>
-    <p>
-      {% assign author = site.data.authors[post.author] %}
-      {% if author %}
-          <B>Written by {{author.name}}</B>
+  <!-- pagination 영역 -->
+  <div id="pagination">
+    {% for post in paginator.posts %}
+      <article>
+      <div class="heading"><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></div>
+      <p class="meta"><a class="permalink" href="{{ site.baseurl }}{{ post.url }}">&#9679;</a> {{ post.date | date_to_string }}</p>
+      <p>
+        {% assign author = site.data.authors[post.author] %}
+        {% if author %}
+            <B>Written by {{author.name}}</B>
+        {% endif %}
+      </p>
+      <div>
+        {% if post.excerpt %}
+          {{ post.excerpt | strip_html | truncatewords: 30}}
+        {% else %}
+          {{ post.content }}
+        {% endif }
+        </div>
+      {% include tags.html %}
+      </article>
+
+    {% endfor %}
+
+    <ul class="pager">
+      {% if paginator.previous_page %}
+          <li class="previous"><a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer</a></li>
       {% endif %}
-    </p>
-    <div>
-      {% if post.excerpt %}
-        {{ post.excerpt | strip_html | truncatewords: 30}}
-      {% else %}
-        {{ post.content }}
-      {% endif }
-      </div>
-    {% include tags.html %}
-    </article>
+        {% if paginator.next_page %}
+          <li class="next"><a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older &rarr;</a></li>
+      {% endif %}
+    </ul>
+  </div>
+  <!-- 빈 공간 -->
 
-  {% endfor %}
-
-<ul class="pager">
-  {% if paginator.previous_page %}
-      <li class="previous"><a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer</a></li>
-  {% endif %}
-    {% if paginator.next_page %}
-      <li class="next"><a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older &rarr;</a></li>
-  {% endif %}
-</ul>
+  <!-- 우측 사이드 바 영역 -->
+  <ul id="side-bar">
+    <!-- 인기 포스트 영역 -->
+    <li>
+      Top5 list
+    </li>
+    <!-- Tags 영역 -->
+    <li>
+      Tags list
+    </li>
+  </div>
 </section>
