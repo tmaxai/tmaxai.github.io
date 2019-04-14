@@ -1,21 +1,16 @@
 <header>
-<div id="nav_container">
 <nav>
-{% unless page.layout == 'front' %}
+  <!-- homepage logo -->
+  <a href="/"><img style="height: 20px; float: left" src="/assets/img/icon/TmaxAI.png"/></a>
+  <!-- search button -->
+  <a href="/search/index.html"><img style="height: 20px; float: right" src="/assets/img/icon/search_button.png"/></a>
+  <!-- navigation item -->
   <ul>
-  <h1><a href="{{ site.url }}">{{ site.title }}</a></h1>  <!-- TODO : 페이지 타이틀 글씨 대신 이미지로 변경-->
-    {% for link in site.navigation %}
-      {% assign current = nil %}
-      {% if page.url == link.url or page.layout == link.layout %}
-        {% assign current = 'current' %}
-      {% endif %}
-
-      <li class="{{ current }}">
-        <a class="{{ current }}" href="{{ site.url }}{{ link.url }}">{{ link.text }}</a>
-      </li>
+    {% for page in site.navigation %}
+    <li class="nav-item">
+      <a href="{{ site.url }}{{ page.url }}">{{ page.text }}</a>
+    </li>
     {% endfor %}
   </ul>
-{% endunless %}
 </nav>
-</div>
 </header>
