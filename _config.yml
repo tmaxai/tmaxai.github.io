@@ -15,7 +15,7 @@ highlighter: rouge
 excerpt_separator: "<!-- more -->"
 markdown: kramdown
 permalink: /post/:title/
-paginate: 5
+paginate: 6
 plugins: [jekyll-paginate]
 paginate_path: "/page:num"
 rss_path: /feed.xml
