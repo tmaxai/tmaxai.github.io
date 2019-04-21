@@ -1,0 +1,18 @@
+<article class="paginate-card">
+    <div class="heading"><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></div>
+    <p class="meta"><a class="permalink" href="{{ site.baseurl }}{{ post.url }}">&#9679;</a> {{ post.date | date_to_string }}</p>
+    <p>
+        {% assign author = site.data.authors[post.author] %}
+        {% if author %}
+            <B>Written by {{author.name}}</B>
+        {% endif %}
+    </p>
+    <div>
+        {% if post.excerpt %}
+            {{ post.excerpt | strip_html | truncatewords: 30}}
+        {% else %}
+            {{ post.content }}
+        {% endif }
+    </div>
+    {% include tags.html %}
+</article>
