@@ -204,7 +204,8 @@ li {
     margin-left: 5%;
 	margin-top: 5px;
 	line-height: 1.6em;
-	font-size: 0.8em;
+  font-family:"Spoqa Han Sans", -apple-system,system-ui, "Segoe UI", Roboto, "Nanum Gothic", "Helvetica Neue", Arial,sans-serif;
+	font-size: 0.9em;
 	margin-bottom: 5px;
 }
 a {
