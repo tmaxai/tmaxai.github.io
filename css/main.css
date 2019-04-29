@@ -8,13 +8,15 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:800);
 @import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 @import url(https://fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css);
 * {
     margin: 0px;
     padding: 0px;
 }
 body {
     color: #141515;
-    font-family:-apple-system,system-ui, "Segoe UI", Roboto, "Nanum Gothic", "Helvetica Neue", Arial,sans-serif;
+    font-family:"Spoqa Han Sans", -apple-system,system-ui, "Segoe UI", Roboto, "Nanum Gothic", "Helvetica Neue", Arial,sans-serif;
     text-rendering: optimizeLegibility;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -28,7 +30,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Nanum Gothic", "Jeju Gothic", "Helvetica Neue", "Lucida Grande", sans-serif;
+    font-family: "Spoqa Han Sans",-apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Nanum Gothic", "Jeju Gothic", "Helvetica Neue", "Lucida Grande", sans-serif;
     font-weight: 400;
     color: #315572;
 }
@@ -158,7 +160,7 @@ nav .nav-item a:hover{
     background: #88c2c2;
 }
 .heading {
-    font-family: "Jeju Gothic", serif;
+    font-family: "Spoqa Han Sans","Jeju Gothic", serif;
     font-weight: 600;
     font-size: 22px;
     text-transform: uppercase;
@@ -174,7 +176,7 @@ p em {
 }
 .meta {
     color: #666666;
-    font-family: -apple-system, "Roboto", Courier, mono;
+    font-family: "Spoqa Han Sans", -apple-system, "Roboto", Courier, mono;
     font-weight: 100;
     text-align: left;
     margin-bottom: 1em;
@@ -200,7 +202,7 @@ p {
 p strong {
     font-weight: 500;
     font-style: normal;
-    font-family: Roboto, Helvetica Neue, Helvetica, Arial, Sans-serif !important;
+    font-family: "Spoqa Han Sans",Roboto, Helvetica Neue, Helvetica, Arial, Sans-serif !important;
 }
 table {
     border-collapse: collapse;
@@ -225,7 +227,8 @@ table, th, td {
     margin-bottom: 5px;
 }
 .label a {
-    font: 75% -apple-system, Roboto, Helvetica Neue, Helvetica, "Open Sans", Arial, sans-serif;
+    font: "Spoqa Han Sans", -apple-system, Roboto, Helvetica Neue, Helvetica, "Open Sans", Arial, sans-serif;
+    font-size: 75%;
     font-weight: 300 !important;
     color: #ffffff;
 }
@@ -243,7 +246,7 @@ table, th, td {
     text-decoration: none;
 }
 .tag-header {
-    font-family: Raleway, Helvetica;
+    font-family: "Spoqa Han Sans",Raleway, Helvetica;
     text-transform: uppercase;
 }
 hr {
@@ -259,7 +262,8 @@ li {
     margin-left: 5%;
 	margin-top: 5px;
 	line-height: 1.6em;
-	font-size: 0.8em;
+  font-family:"Spoqa Han Sans", -apple-system,system-ui, "Segoe UI", Roboto, "Nanum Gothic", "Helvetica Neue", Arial,sans-serif;
+	font-size: 0.9em;
 	margin-bottom: 5px;
 }
 a {
@@ -340,7 +344,7 @@ code {
 }
 #archive li span,
 #tags li span {
-    font-family: Roboto, Helvetica Neue, Helvetica, Arial, Sans-serif !important;
+    font-family: "Spoqa Han Sans",Roboto, Helvetica Neue, Helvetica, Arial, Sans-serif !important;
     font-weight: 300;
     color: #305471;
 }
@@ -348,7 +352,7 @@ code {
 #tags li span.details {
     font-weight: 300;
     color: #9f9f9f;
-    font: 14px "Open Sans", Helvetica Neue, Helvetica, Arial, Sans-serif !important;
+    font: 14px "Spoqa Han Sans","Open Sans", Helvetica Neue, Helvetica, Arial, Sans-serif !important;
     position: relative;
     top: 2px;
     margin-right: 5px;
