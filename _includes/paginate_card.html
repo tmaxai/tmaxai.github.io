@@ -13,12 +13,12 @@
         <a href="{{ site.baseurl }}{{ post.url }}">
             <img class="thumbnail" src="{{ post.thumbnail }}"/>
             <!-- 제목 -->
-            <p class="title" style="margin-top: 20px; max-height: 68px">{{ post.title | strip_html | truncatewords: 15}}</p>
+            <p class="title" style="margin-top: 20px; max-height: 2.5em; overflow: hidden">{{ post.title | strip_html | truncatewords: 15}}</p>
         </a>
         <!-- 본문 -->
-        <p style="font-size: 14px; margin-top: 20px; text-align: justify">
+        <p class="content" style="margin-top: 16px; max-height: 2.8em">
             {% if post.excerpt %}
-                {{ post.excerpt | strip_html | truncatewords: 10}}
+                {{ post.excerpt | strip_html | truncatewords: 30}}
             {% else %}
                 {{ post.content }}
             {% endif %}
@@ -27,12 +27,12 @@
     {% else %}
         <a href="{{ site.baseurl }}{{ post.url }}">
             <!-- 제목 -->
-            <p class="title" style="margin-top: 30px; max-height: 68px">{{ post.title | | truncatewords: 15, '...' }}</p>
+            <p class="title" style="margin-top: 30px; max-height: 3.7em; overflow: hidden">{{ post.title | strip_html | truncatewords: 15}}</p>
         </a>
         <!-- 본문 -->
-        <p style="font-size: 14px; margin-top: 30px; text-align: justify">
+        <p class="content" style="margin-top: 30px; max-height: 8.3em">
             {% if post.excerpt %}
-                {{ post.excerpt | strip_html | truncatewords: 30}}
+                {{ post.excerpt | strip_html | truncatewords: 40}}
             {% else %}
                 {{ post.content }}
             {% endif %}
