@@ -1,18 +1,57 @@
 <article class="paginate-card">
-    <div class="heading"><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></div>
-    <p class="meta"><a class="permalink" href="{{ site.baseurl }}{{ post.url }}">&#9679;</a> {{ post.date | date_to_string }}</p>
+    <div class="post-meta">
+        <!-- post category -->
+        <p class="category">{{ post.categories }}</p>
+        <!-- posted date -->
+        <div class="date">
+            <p>{{ post.date | date: "%Y.%m.%d" }}</p>
+            <img src="/assets/img/icon/watch.png"/>
+        </div>
+    </div>
+    <!-- 대표 이미지 있을 때 -->
+    {% if post.thumbnail %}
+        <a href="{{ site.baseurl }}{{ post.url }}">
+            <img class="thumbnail" src="{{ post.thumbnail }}"/>
+            <!-- 제목 -->
+            <p class="title" style="margin-top: 20px; max-height: 68px">{{ post.title | strip_html | truncatewords: 15}}</p>
+        </a>
+        <!-- 본문 -->
+        <p style="font-size: 14px; margin-top: 20px; text-align: justify">
+            {% if post.excerpt %}
+                {{ post.excerpt | strip_html | truncatewords: 10}}
+            {% else %}
+                {{ post.content }}
+            {% endif %}
+        </p>
+    <!-- 대표이미지 없을 때 -->
+    {% else %}
+        <a href="{{ site.baseurl }}{{ post.url }}">
+            <!-- 제목 -->
+            <p class="title" style="margin-top: 30px; max-height: 68px">{{ post.title | | truncatewords: 15, '...' }}</p>
+        </a>
+        <!-- 본문 -->
+        <p style="font-size: 14px; margin-top: 30px; text-align: justify">
+            {% if post.excerpt %}
+                {{ post.excerpt | strip_html | truncatewords: 30}}
+            {% else %}
+                {{ post.content }}
+            {% endif %}
+        </p>
+    {% endif %}
+    <!-- author information -->
+    {% assign author = site.data.authors[post.author] %}
+    {% if author %}
+    <div class="author-info vertical-middle">
+        <img class="vertical-middle-item" style="width: 40px; height:40px" src="/favicon.ico"/>
+        <p class="vertical-middle-item" style="width: 100%; padding-left: 10px; font-size: 14px"> <i>by</i> {{ author.name }}</p>
+    </div>
+    {% endif %}
+    <!-- author
     <p>
         {% assign author = site.data.authors[post.author] %}
         {% if author %}
             <B>Written by {{author.name}}</B>
         {% endif %}
-    </p>
-    <div>
-        {% if post.excerpt %}
-            {{ post.excerpt | strip_html | truncatewords: 30}}
-        {% else %}
-            {{ post.content }}
-        {% endif }
-    </div>
-    {% include tags.html %}
+    </p> -->
+    <!-- {% include tags.html %} -->
 </article>

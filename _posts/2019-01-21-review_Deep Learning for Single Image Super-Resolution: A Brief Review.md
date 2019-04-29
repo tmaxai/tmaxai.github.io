@@ -4,6 +4,7 @@ title: "[Review] Deep Learning for Single Image Super-Resolution: A Brief Review
 date: 2019-01-21
 categories: [Review]
 tags: [Super Resolution, survey]
+thumbnail: "/assets/img/2019-01-21-single-image-super-resolution/2.png"
 author: ssunno
 ---
 
