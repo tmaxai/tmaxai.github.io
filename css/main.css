@@ -136,6 +136,7 @@ nav .nav-item a:hover{
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     margin-bottom: 0px;
+    height: 100%;
 }
 .paginate-card .content {
     font-weight: 300;
