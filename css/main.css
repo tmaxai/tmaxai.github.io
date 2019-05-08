@@ -132,9 +132,6 @@ nav .nav-item a:hover{
     font-size: 22px;
     font-weight: 600;
     line-height: 1.2;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
     margin-bottom: 0px;
     height: 100%;
 }
