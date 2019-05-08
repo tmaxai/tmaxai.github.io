@@ -16,6 +16,14 @@ group: navigation
 
     {% endfor %}
 
+  <!-- READ MORE button-->
+  <div id="readmore-btn">
+    <div style="display: inline-block">
+        <img src="/assets/img/icon/down_arrow.png"/>
+        <p>READ MORE</p>
+    </div>
+  </div>
+<!--
     <ul class="pager">
       {% if paginator.previous_page %}
           <li class="previous"><a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer</a></li>
@@ -23,8 +31,9 @@ group: navigation
         {% if paginator.next_page %}
           <li class="next"><a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older &rarr;</a></li>
       {% endif %}
-    </ul>
+    </ul>-->
   </div>
+
   <!-- 빈 공간 -->
 
   <!-- 우측 사이드 바 영역 -->
