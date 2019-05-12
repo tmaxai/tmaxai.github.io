@@ -38,8 +38,8 @@ h6 {
     line-height: 1.6em;
 }
 .default-margin {
-    margin-left: 90px;
-    margin-right: 90px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .vertical-middle {
     display: table;
@@ -201,6 +201,9 @@ nav .nav-item a:hover{
 p em {
     font-style: italic;
 	font-size: 98%;
+}
+.post {
+    width: 840px;
 }
 .meta {
     color: #666666;
