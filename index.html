@@ -7,14 +7,32 @@ group: navigation
   {% for post in paginator.posts %}
       <hr>
       <article>
-      <div class="heading"><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></div>
+
+
+
+      <div class="heading">
+
+     {% if post.categories %} 
+    {% for category in post.categories %}
+    [<a href="{{ site.baseurl }}{{ site.category_page }}#{{ category | slugify }}" class="post-category">{{ category }}</a>]
+    {% endfor %}
+    {% endif %}
+      
+        <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+      </div>
       <p class="meta"><a class="permalink" href="{{ site.baseurl }}{{ post.url }}">&#9679;</a> {{ post.date | date_to_string }}</p>
+
+    
       <p>
         {% assign author = site.data.authors[post.author] %}
         {% if author %}
             <B>Written by {{author.name}}</B>
         {% endif %}
       </p>
+      
+         
+
+ 
       <div>
         {% if post.excerpt %}
           {{ post.excerpt | strip_html | truncatewords: 30}}
@@ -22,7 +40,8 @@ group: navigation
           {{ post.content }}
         {% endif }
         </div>
-             {% include tags.html %}
+        <div>{% %}</br></br>
+             {% include tags.html %} </div>
      </article>
 
   {% endfor %}
